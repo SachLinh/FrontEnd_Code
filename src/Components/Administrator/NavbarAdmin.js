@@ -1,57 +1,91 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { Component, useState } from "react";
+import Icon from "@material-tailwind/react/Icon";
+import H6 from "@material-tailwind/react/Heading6";
+import { Link, NavLink } from "react-router-dom";
 
 export default function NavbarAdmin() {
-  return (
-    <div className="w-[18%] rounded-xl shadow-[0_0px_9px_1px_#ffb3b3]">
-      <div className="w-full flex flex-col justify-start items-start bg-[#FBEAEB] rounded-xl">
-        <div className="w-full">
-          {" "}
-          <Link to="" className="flex flex-row justify-start items-start">
-            <img
-              src="https://colorlib.com//polygon/adminty/files/assets/images/logo.png"
-              alt=""
-              className="w-full bg-[#f3a2a8] p-[15px] rounded-t-xl"
-            />
-          </Link>
-        </div>
-        <div className="w-full">
-          <ul className="w-full flex flex-col justify-start items-start text-[#2f3c7e] font-Roboto text-[20px] font-[500] ease-in-out">
-            <li className="w-full my-[20px] h-[70px] leading-[70px] mt-[0px] hover:bg-[#fa9f9f] hover:text-[#3956fd]">
-              <Link className="inline-block w-full h-full pl-[20px]" to="">
-              <i className="fa-solid fa-house-user mr-[10px]"></i>
-                Dashboard
-              </Link>{" "}
-            </li>
-          
-            <li className="w-full my-[20px]  h-[70px] leading-[70px] hover:bg-[#fa9f9f] hover:text-[#3956fd]">
-              <Link className="inline-block w-full h-full pl-[20px]" to="/Admin/QuanLyHangSX">
-                <i className="fa-solid fa-computer mr-[10px]"></i>
-                Quản lý User
-              </Link>
-            </li>
-            <li className="w-full my-[20px]  h-[70px] leading-[70px] hover:bg-[#fa9f9f] hover:text-[#3956fd]">
-              <Link className="inline-block w-full h-full pl-[20px]" to="/Admin/QuanLyHangSX">
-                <i className="fa-solid fa-computer mr-[10px]"></i>
-                Quản lý Hãng SX
-              </Link>
-            </li>
-            <li className="w-full my-[20px]  h-[70px] leading-[70px] hover:bg-[#fa9f9f] hover:text-[#3956fd]">
-              <Link className="inline-block w-full h-full pl-[20px]" to="/Admin/QuanLySanPham">
-                <i className="fa-solid fa-computer mr-[10px]"></i>
-                Quản lý Sản Phẩm
-              </Link>
-            </li>
-            <li className="w-full my-[20px]  h-[70px] leading-[70px] mb-[0px] hover:bg-[#fa9f9f] hover:text-[#3956fd]">
-              <Link className="inline-block w-full h-full pl-[20px]" to="/Admin/QuanLyHoaDon">
+  const [showSidebar, setShowSidebar] = useState("-left-64");
 
-                <i className="fa-solid fa-address-card mr-[10px]"></i>
-                Quản lý Hóa Đơn
-              </Link>
-            </li>
-          </ul>
+  return (
+    <>
+      {/* <AdminNavbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} /> */}
+      <div
+        className={`h-screen fixed top-0 md:left-0 ${showSidebar} overflow-y-auto flex-row ml-[10px] mt-[10px] rounded-xl
+        flex-nowrap overflow-hidden shadow-xl bg-white w-64 z-10 transition-all duration-300`}
+      >
+        <div className="flex-col items-stretch min-h-full flex-nowrap relative">
+          <Link
+            to=""
+            rel="noreferrer"
+            className="text-center w-full inline-block bg-gradient-to-r from-red-200 via-red-300 to-yellow-200"
+          >
+            <H6 color="gray">
+              <img 
+                src={require(`../../Components/FooterAndHeader/Images/logo2.png`)}
+              />
+            </H6>
+          </Link>
+          <div className="flex flex-col px-3">
+            <hr className="my-4 min-w-full" />
+            <ul className="flex-col min-w-full flex list-none">
+              <li className="rounded-lg mb-4">
+                <NavLink
+                  to=""
+                  exact
+                  className="flex items-center gap-4 text-2xl font-[4500] text-gray-700 px-4 py-3 rounded-lg 
+                  active:bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 active:text-[#533fff] shadow-md"
+                >
+                  <i className="fa-solid fa-bars text-[#f12222] text-2xl"></i>
+                  Dashboard
+                </NavLink>
+              </li>
+              <li className="rounded-lg mb-4">
+                <NavLink
+                  to=""
+                  exact
+                  className="flex items-center gap-4 text-2xl font-[4500] text-gray-700 px-4 py-3 rounded-lg 
+                  active:bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 active:text-[#533fff] shadow-md"
+                >
+                  <i class="fa-solid fa-users text-[#050505] text-2xl"></i>
+                  Tài khoản
+                </NavLink>
+              </li>
+              <li className="rounded-lg mb-2">
+                <NavLink
+                  to="/Admin/QuanLyHangSX"
+                  className="flex items-center gap-4 text-2xl font-[4500] text-gray-700 px-4 py-3 rounded-lg
+                  active:bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 active:text-[#533fff] shadow-md"
+                >
+                  <i className="fa-brands fa-app-store text-[#d139ab] text-2xl"></i>
+                  Hãng SX
+                </NavLink>
+              </li>
+              <li className="rounded-lg mb-2">
+                <NavLink
+                  to="/Admin/QuanLySanPham"
+                  className="flex items-center gap-4 text-2xl font-[4500] text-gray-700 px-4 py-3 rounded-lg
+                  active:bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 active:text-[#533fff] shadow-md
+                  " 
+                >
+                  <i class="fa-brands fa-product-hunt text-[#3f52ff] text-2xl"></i>
+                  Sản Phẩm
+                </NavLink>
+              </li>
+              <li className="rounded-lg mb-2">
+                <NavLink
+                  to="/Admin/QuanLyHoaDon"
+                  className="flex items-center gap-4 text-2xl font-[4500] text-gray-700 px-4 py-3 rounded-lg
+                  active:bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 active:text-[#533fff] shadow-md
+                  "
+                >
+                  <i class="fa-solid fa-file-invoice text-[#729423] text-2xl "></i>
+                  Hóa Đơn
+                </NavLink>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

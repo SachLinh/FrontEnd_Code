@@ -24,7 +24,7 @@ export const getDanhMucByID = createAsyncThunk(
   async (payload) => {
     try {
       const res = await axios.get(
-        `https://6232e62e6de3467dbac2a7d6.mockapi.io/Loai/${payload}`
+        `http://192.168.108.107:5000/catas/${payload}`
       );
       return res.data;
     } catch (error) {
@@ -38,7 +38,7 @@ export const deleteDanhMucByID = createAsyncThunk(
   async (payload) => {
     try {
       const res = await axios.delete(
-        `https://6232e62e6de3467dbac2a7d6.mockapi.io/Loai/${payload}`
+        `http://192.168.108.107:5000/catas/${payload}`
       );
       return res.data;
     } catch (error) {
@@ -52,10 +52,8 @@ export const updateDanhMucByID = createAsyncThunk(
   async (payload) => {
     try {
       const res = await axios.put(
-        `https://6232e62e6de3467dbac2a7d6.mockapi.io/Loai/${payload.id}`, payload
+        `http://192.168.108.107:5000/catas/${payload.init.id}`, payload.data
       );
-      console.log('payload',payload);
-      
       return res.data;
     } catch (error) {
       console.log(error);
@@ -68,9 +66,10 @@ export const AddNewLoai = createAsyncThunk(
   async (payload) => {
     try {
       const res = await axios.post(
-        `https://6232e62e6de3467dbac2a7d6.mockapi.io/Loai`,
-        payload.data
+        `http://192.168.108.107:5000/catas`,
+        payload
       );
+     
       return res.data;
     } catch (error) {
       console.log(error);
@@ -126,8 +125,8 @@ export const AllDanhMucSlice = createSlice({
       })
       .addCase(updateDanhMucByID.fulfilled, (state, action) => {
         for (let i = 0; i < state.listCata.length; i++) {
-          if (state.listCata[i]._id === action.payload.id) {
-            state.listCata.splice(i, 1, action.payload);
+          if (state.listCata.catas[i]._id === action.payload.id) {
+            state.listCata.catas.splice(i, 1, action.payload);
           }
         }
       })
@@ -140,7 +139,7 @@ export const AllDanhMucSlice = createSlice({
         state.listCata = [];
       })
       .addCase(AddNewLoai.fulfilled, (state, action) => {
-        state.listCata.push(action.payload);
+        state.listCata.catas.push(action.payload);
       })
       .addCase(AddNewLoai.rejected, (state, action) => {
         state.listCata = [];

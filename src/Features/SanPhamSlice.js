@@ -5,12 +5,12 @@ const initialState = {
   detailSP: null,
 };
 export const getAllSanPham = createAsyncThunk(
-  "/AllDanhMuc",
+  "/AllSanPham",
   // Declare the type your function argument here:
   async () => {
     try {
       const res = await axios.get(
-        "https://6232e62e6de3467dbac2a7d6.mockapi.io/SanPham"
+        "http://192.168.108.107:5000/products"
       );
       return res.data;
     } catch (error) {
@@ -24,7 +24,7 @@ export const detailSP = createAsyncThunk(
   async (payload) => {
     try {
       const res = await axios.get(
-        `https://6232e62e6de3467dbac2a7d6.mockapi.io/SanPham/${payload}`
+        `http://192.168.108.107:5000/products/${payload}`
       );
       return res.data;
     } catch (error) {
@@ -32,14 +32,13 @@ export const detailSP = createAsyncThunk(
     }
   }
 );
-
 export const AddNewSP = createAsyncThunk(
   "/AddNewSP",
   // Declare the type your function argument here:
   async (payload) => {
     try {
       const res = await axios.post(
-        `https://6232e62e6de3467dbac2a7d6.mockapi.io/SanPham`,
+        `http://192.168.108.107:5000/products/`,
         payload.data
       );
       return res.data;
@@ -55,11 +54,9 @@ export const UpdateSP = createAsyncThunk(
   async (payload) => {
     try {
       const res = await axios.put(
-        `https://6232e62e6de3467dbac2a7d6.mockapi.io/SanPham/${payload.id}`,
-        payload
-      );
-      console.log('patload', payload);
-      
+        `http://192.168.108.107:5000/products/${payload.init.id}`,
+        payload.dataUpdate
+      );      
       return res.data;
     } catch (error) {
       console.log(error);
@@ -82,7 +79,7 @@ export const deleteSanPham = createAsyncThunk(
   }
 );
 export const AllSanPhamSlice = createSlice({
-  name: "Loai",
+  name: "SanPham",
   initialState,
   reducers: {},
   extraReducers: (builder) => {

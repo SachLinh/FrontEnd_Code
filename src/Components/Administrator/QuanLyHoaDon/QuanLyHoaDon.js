@@ -100,8 +100,9 @@ export default function QuanLyHoaDon() {
     );
   });
   return (
-    <div className="w-full">
-      <h1 className="text-[#f73d3d] text-[40px] w-full text-center bg-[#e2e2e2] p-[15px] rounded-xl">
+    <div className="w-full bg-[#fcf8f2]">
+      <h1 className="text-[#f73d3d] text-[40px] w-full text-center
+       bg-gradient-to-r from-[#fde4be] to-[#f5a9dc] p-[15px] rounded-xl">
         QUẢN LÝ HÓA ĐƠN
       </h1>
       <div className="mt-[10px] flex flex-row justify-start items-center px-[20px] mb-[20px]">

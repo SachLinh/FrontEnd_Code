@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -12,17 +11,18 @@ export default function UpdateLoaiSP() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getDanhMucByID(params.idLoai));
+    dispatch(getDanhMucByID(params.idCate));
   }, []);
   const initState = {
-    id: "",
     name: "",
   };
+  const init = {
+    id: params.idCate,
+  };
   const [data, setData] = useState(initState);
-  const { id, name } = data;
+  const { name } = data;
   const onChangeText = (e) => {
     setData({
-      id: editLoaiSP?.id,
       name: e.target.value,
     });
   };
@@ -33,9 +33,8 @@ export default function UpdateLoaiSP() {
       if (data.name === "") {
         alert("Vui lòng nhập tên cần thay đổi");
       } else {
-        dispatch(updateDanhMucByID(data));
+        dispatch(updateDanhMucByID({init,data}));
         setData({
-          id: "",
           name: "",
         });
         alert("Thay đổi thành công");
@@ -47,13 +46,13 @@ export default function UpdateLoaiSP() {
   };
   return (
     <div className="">
-      <div className="">
-        <h2 className="text-[#f73d3d] text-[40px] w-full text-center bg-[#e2e2e2] p-[15px] rounded-xl">
+      <div className="bg-[#fcf8f2]">
+        <h2 className="text-[#f73d3d] text-[40px] w-full text-center bg-gradient-to-r from-[#fde4be] to-[#f5a9dc] p-[15px] rounded-xl">
           Update Hãng Sản Xuất
         </h2>
         <Link to="/Admin/QuanLyHangSX" className="">
           <button className="my-[10px] ml-[10px] p-[10px] border-2 btn btn-outline-danger rounded-xl font-Roboto font-[500] text-[20px]">
-            <i className="fa-solid fa-arrow-rotate-left"></i>Trở Lại
+            <i className="fa-solid fa-arrow-rotate-left"></i>Back
           </button>
         </Link>
         <form className="flex justify-between items-center p-[50px]">
@@ -61,8 +60,8 @@ export default function UpdateLoaiSP() {
           <input
             type="text"
             name="danhMucId"
-            placeholder={editLoaiSP?.id}
-            value={editLoaiSP?.id}
+            placeholder={editLoaiSP?.cata?._id}
+            value={editLoaiSP?.cata?._id}
             disabled
             className="border p-[10px] mr-[20px] outline-none"
           />
@@ -71,7 +70,7 @@ export default function UpdateLoaiSP() {
           <input
             type="text"
             name="name"
-            placeholder={editLoaiSP?.name}
+            placeholder={editLoaiSP?.cata?.name}
             value={name}
             className="border p-[10px] mr-[20px] outline-none"
             onChange={onChangeText}

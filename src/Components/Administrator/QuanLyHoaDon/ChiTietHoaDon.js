@@ -7,7 +7,6 @@ import { getAllSanPham } from "../../../Features/SanPhamSlice";
 export default function ChiTietHoaDon() {
   const param = useParams();
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getChiTietHoaDon(param.idhoadon));
     dispatch(getAllSanPham());
@@ -18,8 +17,9 @@ export default function ChiTietHoaDon() {
   const listSPham = listSP.listSanPham;
 
   return (
-    <div className="w-full">
-      <h1 className="text-[#f73d3d] text-[40px] w-full text-center bg-[#e2e2e2] p-[15px] rounded-xl">
+    <div className="w-full bg-[#fcf8f2]">
+      <h1 className="text-[#f73d3d] text-[40px] w-full text-center 
+      bg-gradient-to-r from-[#fde4be] to-[#f5a9dc] p-[15px] rounded-xl">
         CHI TIẾT HÓA ĐƠN
       </h1>
       <Link to="/Admin/QuanLyHoaDon" className="">
@@ -99,10 +99,10 @@ export default function ChiTietHoaDon() {
                     <th className="border border-slate-400">count</th>
                   </tr>
                 </thead>
-                {listHoaDon?.productList.map((item, index) => {
+                {/* {listHoaDon?.productList.map((item, index) => {
                   return (
                     <tbody>
-                      {listSPham.map((itemSP, index) => {
+                      {listSPham.product.map((itemSP, index) => {
                         if (item.id === itemSP.id) {
                           return (
                             <tr className="text-center">
@@ -129,7 +129,7 @@ export default function ChiTietHoaDon() {
                       })}
                     </tbody>
                   );
-                })}
+                })} */}
               </table>
             </td>
           </tr>

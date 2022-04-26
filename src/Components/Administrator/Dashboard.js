@@ -1,21 +1,71 @@
+import StatusCard from "./DashBroads/StatusCard";
+import PageVisitsCard from "./DashBroads/PageVisitsCard";
+import TrafficCard from "./DashBroads/TrafficCard";
 export default function Dashboard() {
   return (
-    <div className="w-full flex flex-col justify-between items-center">
-      <div className="w-full flex flex-row justify-start items-start">
-        <img
-          src="https://tr.rbxcdn.com/fea7e9538a6a6a369f54f8c5ce744bd8/420/420/Image/Png"
-          alt=""
-          className="w-[100px] h-[100px] mr-[30px]"
-        />
-        <h1 className="text-[40px] p-[20px] text-[#f33434] font-[1000]">
-          ADMINISTRATOR
-        </h1>
+    <div className=" bg-gradient-to-r from-[#fde4be] to-[#f5a9dc] rounded-xl mb-[30px] mt-[-20px]">
+      <div className="bg-light-blue-500 px-3 md:px-8 h-40 text-center text-[40px] text-[#4e04f8] pt-[30px] font-mono font-[700]">
+        Sách Linh Store
       </div>
-      <img
-        src="https://image.shutterstock.com/image-vector/welcome-poster-spectrum-brush-strokes-260nw-1146069941.jpg"
-        alt=""
-        className="w-full h-[385px] rounded-xl"
-      />
+      <div className="px-3 md:px-8">
+        <div className="container mx-auto max-w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 mb-4">
+            <StatusCard
+              color="pink"
+              icon="trending_up"
+              title="Traffic"
+              amount="350,897"
+              percentage="3.48"
+              percentageIcon="arrow_upward"
+              percentageColor="green"
+              date="Since last month"
+            />
+            <StatusCard
+              color="orange"
+              icon="groups"
+              title="New Users"
+              amount="2,356"
+              percentage="3.48"
+              percentageIcon="arrow_downward"
+              percentageColor="red"
+              date="Since last week"
+            />
+            <StatusCard
+              color="purple"
+              icon="paid"
+              title="Sales"
+              amount="924"
+              percentage="1.10"
+              percentageIcon="arrow_downward"
+              percentageColor="orange"
+              date="Since yesterday"
+            />
+            <StatusCard
+              color="blue"
+              icon="poll"
+              title="Performance"
+              amount="49,65%"
+              percentage="12"
+              percentageIcon="arrow_upward"
+              percentageColor="green"
+              date="Since last month"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="px-3 md:px-8 h-auto">
+        <div className="container mx-auto max-w-full">
+          <div className="grid grid-cols-1 xl:grid-cols-5">
+            <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14">
+              <PageVisitsCard />
+            </div>
+            <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">
+              <TrafficCard />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

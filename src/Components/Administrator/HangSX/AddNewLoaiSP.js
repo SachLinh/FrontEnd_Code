@@ -4,67 +4,82 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import { AddNewLoai } from "../../../Features/MenuSlice";
+import { useForm } from "react-hook-form";
 
 const initState = {
-  id: "",
   name: "",
 };
 export default function AddNewLoaiSP() {
-  const [addLoaiSP, setAddLoaiSP] = useState([]);
   const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const [data, setData] = useState(initState);
-  const { id, name } = data;
+  const { name } = data;
   const dispatch = useDispatch();
   const onChangeText = (e) => {
     setData({
-      id: "",
       name: e.target.value,
     });
   };
   const onSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     try {
-      if (data.name === "") {
-        alert("Vui lòng nhập Id, Name cần thêm mới");
-      } else {
-        dispatch(AddNewLoai({ data }));
-        setData({
-          id: "",
-          name: "",
-        });
-
-        alert("Thêm mới thành công");
-        navigate(`/Admin/QuanLyHangSX`);
-      }
+      dispatch(AddNewLoai(data));
+      alert("Thêm mới thành công");
+      navigate(`/Admin/QuanLyHangSX`);
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <div>
-      <div className="">
-        <h2 className="text-[#f73d3d] text-[40px] w-full text-center bg-[#e2e2e2] p-[15px] rounded-xl">
+      <div className="bg-[#fcf8f2]">
+        <h2
+          className="text-[#f73d3d] text-[40px] w-full text-center
+          bg-gradient-to-r from-[#fde4be] to-[#f5a9dc] p-[15px] rounded-xl"
+        >
           Thêm Hãng Sản Xuất Mới
         </h2>
         <Link to="/Admin/QuanLyHangSX" className="">
           <button className="my-[10px] ml-[10px] p-[10px] border-2 btn btn-outline-danger rounded-xl font-Roboto font-[500] text-[20px]">
-            <i className="fa-solid fa-arrow-rotate-left"></i>Trở Lại
+            <i className="fa-solid fa-arrow-rotate-left"></i>Back
           </button>
         </Link>
-        <form className="flex flex-row justify-between items-center p-[50px]">
-          <label htmlFor="">Tên Hãng</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Vui lòng nhập hãng"
-            value={name}
-            className="border p-[10px] mr-[20px] outline-none"
-            onChange={onChangeText}
-          />
+        <form onSubmit={handleSubmit(onSubmit)} className="px-[20px]">
+          <div className="flex flex-row justify-between items-center p-[50px]">
+            <div className="pt-2 flex flex-row justify-start items-center">
+              <h3 htmlFor="" className="mr-[40px] text-[20px] font-[500]">
+                Tên Hãng
+              </h3>
+              <div className="grid grid-flow-row grid-cols-1 gap-y-2">
+                <input
+                  {...register("name", { required: true })}
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={onChangeText}
+                  placeholder="Họ và tên (bắt buộc)"
+                  className="border p-[10px] mr-[20px] outline-none"
+                />
+                {errors.name && (
+                  <span className="text-red-600 text-xs">
+                    This field is not valid
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
           <button
-            type="button"
-            className="btn btn-outline-primary"
-            onClick={onSubmit}
+            type="submit"
+            className="bg-gradient-to-r from-violet-500 to-fuchsia-500 inline-block px-6 py-2.5 text-[#ffffff]  text-[23px]
+                            font-medium text-xs leading-tight uppercase rounded shadow-md 
+                            hover:bg-[#ff5050] hover:text-[#080808] hover:shadow-lg
+                             focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition 
+                             duration-150 ease-in-out w-[30%] mb-3"
           >
             Thêm Mới
           </button>

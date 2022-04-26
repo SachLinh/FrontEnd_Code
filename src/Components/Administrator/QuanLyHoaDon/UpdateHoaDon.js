@@ -69,8 +69,8 @@ export default function UpdateHoaDon() {
   };
   return (
     <div className="">
-      <div className="">
-        <h2 className="text-[#f73d3d] text-[40px] w-full text-center bg-[#e2e2e2] p-[15px] rounded-xl">
+      <div className="bg-[#fcf8f2]">
+        <h2 className="text-[#f73d3d] text-[40px] w-full text-center bg-gradient-to-r from-[#fde4be] to-[#f5a9dc] p-[15px] rounded-xl">
           Update Hóa Đơn
         </h2>
         <Link to="/Admin/QuanLyHoaDon" className="">

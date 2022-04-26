@@ -1,22 +1,21 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../App/hooks";
 import { deleteSanPham, detailSP } from "../../../Features/SanPhamSlice";
-import { SanPhamType } from "../../../TypeState/SanPhamType";
 
 export default function DeleteProd() {
   const params = useParams();
-  const dispatch = useAppDispatch()
-  const data = useAppSelector(state => state.listSanPham)
-  const sanPham:any = data.detailSP
+  const dispatch = useDispatch()
+  const data = useSelector(state => state.listSanPham)
+  const sanPham = data.detailSP
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(detailSP(params.idSanPham))
   }, []);
 
-  const onSubmit = async (e: any) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -29,8 +28,8 @@ export default function DeleteProd() {
   };
   return (
     <div className="">
-      <div className="">
-        <h2 className="text-[#f73d3d] text-[40px] w-full text-center bg-[#e2e2e2] p-[15px] rounded-xl">
+      <div className="bg-[#fcf8f2]">
+        <h2 className="text-[#f73d3d] text-[40px] w-full text-center bg-gradient-to-r from-[#fde4be] to-[#f5a9dc]  p-[15px] rounded-xl">
           Delete Sản phẩm
         </h2>
         <Link to="/Admin/QuanLySanPham" className="">

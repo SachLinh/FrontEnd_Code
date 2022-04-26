@@ -10,16 +10,15 @@ export default function DeleteLoaiSP() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
-    //getDanhMuc();
-    dispatch(getDanhMucByID(params.idLoai));
+    dispatch(getDanhMucByID(params.idCate));
   }, []);
-  const DetailLoaiSP = useSelector((state) => state.listDanhMuc);
-  const deleteLoaiSP = DetailLoaiSP.detaildele;
+  const DetailHangSX = useSelector((state) => state.listDanhMuc);
+  const deleteLoaiSP = DetailHangSX.detaildele;
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
-       dispatch(deleteDanhMucByID(params.idLoai))
+       dispatch(deleteDanhMucByID(params.idCate))
        alert("Xóa thành công thành công");
       navigate(`/Admin/QuanLyHangSX`);
     } catch (error) {
@@ -28,13 +27,13 @@ export default function DeleteLoaiSP() {
   };
   return (
     <div className="">
-      <div className="">
-        <h2 className="text-[#f73d3d] text-[40px] w-full text-center bg-[#e2e2e2] p-[15px] rounded-xl">
+      <div className="bg-[#fcf8f2]">
+        <h2 className="text-[#f73d3d] text-[40px] w-full text-center bg-gradient-to-r from-[#fde4be] to-[#f5a9dc] p-[15px] rounded-xl">
           Delete Hãng Sản Xuất
         </h2>
         <Link to="/Admin/QuanLyHangSX" className="">
           <button className="my-[10px] ml-[10px] p-[10px] border-2 btn btn-outline-danger rounded-xl font-Roboto font-[500] text-[20px]">
-            <i className="fa-solid fa-arrow-rotate-left"></i>Trở Lại
+            <i className="fa-solid fa-arrow-rotate-left"></i>Back
           </button>
         </Link>
         <form className="flex flex-row justify-between items-center p-[50px]">
@@ -42,16 +41,16 @@ export default function DeleteLoaiSP() {
           <input
             type="text"
             name="id"
-            placeholder={deleteLoaiSP?.id}
-            value={deleteLoaiSP?.id}
+            placeholder={deleteLoaiSP?.cata._id}
+            value={deleteLoaiSP?.cata._id}
             className="border p-[10px] mr-[20px] outline-none"
           />
           <label htmlFor="">Tên Hãng</label>
           <input
             type="text"
             name="name"
-            placeholder={deleteLoaiSP?.id}
-            value={deleteLoaiSP?.name}
+            placeholder={deleteLoaiSP?.cata.name}
+            value={deleteLoaiSP?.cata.name}
             className="border p-[10px] mr-[20px] outline-none"
           />
           <button

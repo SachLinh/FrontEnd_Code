@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
+import { logout } from "../../Features/AuthSlice";
 import YourAccount from "./YourAccount";
 
-
-
 function SmemberMain() {
+  const dispatch = useDispatch()
   const navList = document.getElementsByClassName("nav");
   const url = useParams();
 
@@ -105,7 +106,9 @@ function SmemberMain() {
                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
               />
             </svg>
-            <p className="font-semibold text-17px col-start-2 col-span-4  lg:text-[20px] md:text-[15px]">
+            <p className="font-semibold text-17px col-start-2 col-span-4  lg:text-[20px] md:text-[15px]"  onClick={() => {
+            dispatch(logout());
+          }}>
               Thoát tài khoản
             </p>
           </div>

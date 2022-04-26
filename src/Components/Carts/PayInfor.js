@@ -2,7 +2,7 @@ import React from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { billInfoState, cartProductState, totalPriceState, userInfoState } from '../../Recoil/Recoil';
 import { Link, useNavigate } from 'react-router-dom';
-import { SubmitHandler, useForm } from "react-hook-form";
+import {useForm } from "react-hook-form";
 
 
 export default function PayInfor() {

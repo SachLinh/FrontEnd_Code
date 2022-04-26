@@ -1,10 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function YourAccount() {
+ const user = JSON.parse(localStorage.getItem("user"))
   return (
     <div className="col-start-2 col-span-3 border-[1px] border-gray-300 rounded-xl text-center md:mt-[0px] mt-[15px]">
       <p className="text-[25px] mx-auto text-red-600">Xin chào</p>
-      <h2 className="font-semibold text-red-600 text-3xl">Name</h2>
+      <h2 className="font-semibold text-red-600 text-3xl">{user.user.name}</h2>
       <div className="w-full flex flex-col justify-between items-center">
         <div className="w-full flex flex-row justify-around items-center">
           <div className="">
@@ -24,11 +26,11 @@ export default function YourAccount() {
               />
             </svg>
             <p className="font-semibold text-[12px] lg:text-lg md:text-[14px] sm:text-[13px] break-words">
-              Email User
+              {user.user.email}
             </p>
           </div>
           <div className="">
-            <p className="text-sm lg:text-lg md:text-md">Số điện thoại</p>
+            <p className="text-sm lg:text-lg md:text-md">Phone</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-12 w-12 mx-auto text-red-600"
@@ -44,7 +46,7 @@ export default function YourAccount() {
               />
             </svg>
             <p className="font-semibold text-[12px] lg:text-lg md:text-[14px] sm:text-[13px]">
-              {"userInfo.phoneNumber" || "Chưa cập nhật"}
+            {user.user.phone}
             </p>
           </div>
         </div>
@@ -52,7 +54,7 @@ export default function YourAccount() {
         <form className="form w-full flex flex-row justify-around items-center mb-[50px]">
           <div className="flex flex-col justify-around items-center">
             <label
-              for="inputPassword"
+              htmlFor="inputPassword"
               className="text-sm lg:text-lg md:text-md"
             >
               Password
@@ -60,23 +62,23 @@ export default function YourAccount() {
             <i className="fa-solid fa-key text-[50px] h-12 w-12 my-[5px] text-red-600"></i>
             <input
               type="password"
-              class="form-control"
+              className="form-control"
               id="inputPassword"
               placeholder="Password Old"
               required
-            />
+            />S
           </div>
           <div className="flex flex-col justify-around items-center">
             <label
-              for="inputPassword"
+              htmlFor="inputPassword"
               className="text-sm lg:text-lg md:text-md"
             >
               Password Moi
             </label>
             <i className="fa-brands fa-keycdn  text-[50px] h-12 w-12 my-[5px] text-red-600"></i>
             <input
-              type="password"
-              class="form-control"
+              type="passwordMoi"
+              className="form-control"
               id="inputPassword"
               placeholder="Password new"
               required

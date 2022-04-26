@@ -6,9 +6,9 @@ import CartEmpty from "./CartEmpty";
 import CartItem from "./CartItem";
 
 export default function Cart() {
-  const [total, setTotal]= useRecoilState(totalPriceState);
-  const [ListCart, setListCart] =
-    useRecoilState(cartProductState);
+  const user = JSON.parse(localStorage.getItem('user'))
+  const [total, setTotal] = useRecoilState(totalPriceState);
+  const [ListCart, setListCart] = useRecoilState(cartProductState);
 
   const getListCart = () => {
     const cartProduct = [];
@@ -46,16 +46,16 @@ export default function Cart() {
       currency: "VND",
     }).format(price);
   };
-  
-	const deleteProductInCart = (index) => {
-		const listProduct = [...ListCart];
-		listProduct.splice(index, 1);
-		setListCart(listProduct);
 
-		const localProductList = JSON.parse(localStorage.getItem('data') + "");
-		localProductList.splice(index, 1)
-		localStorage.setItem('data', JSON.stringify(localProductList));
-	}
+  const deleteProductInCart = (index) => {
+    const listProduct = [...ListCart];
+    listProduct.splice(index, 1);
+    setListCart(listProduct);
+
+    const localProductList = JSON.parse(localStorage.getItem("data") + "");
+    localProductList.splice(index, 1);
+    localStorage.setItem("data", JSON.stringify(localProductList));
+  };
 
   useEffect(() => {
     getListCart();
@@ -102,7 +102,7 @@ export default function Cart() {
                 {formatPrice(total)}
               </p>
             </div>
-            <Link to="/payment-infor">
+            <Link to={user.toKen ? `/payment-infor` : `/Smember`}>
               <div className="text-center bg-red-600 text-white font-bold py-4 rounded-md mb-2 cursor-pointer">
                 <p>TIẾN HÀNH ĐẶT HÀNG</p>
               </div>
