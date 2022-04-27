@@ -13,11 +13,11 @@ export default function Body() {
     dispath(getAllDanhMuc());
   }, []);
 
-  if (listDanhMucSp.listCata.catas) {
+  if (listDanhMucSp?.listCata?.catas) {
     var ShowSanPham = listDanhMucSp.listCata.catas.map((item, index) => {
       if (
         item.name === "Apple" ||
-        item.name === "SamSung" ||
+        item.name === "Samsung" ||
         item.name === "Oppo" ||
         item.name === "XiaoMi"
       ) {
@@ -26,12 +26,10 @@ export default function Body() {
             <h4 className="inline-block no-underline lg:text-[25px] md:text-[20px] text-[15px]  2xl:text-left xl:text-left lg:text-left md:text-left sm:text-center text-center font-bold ... hover:underline ... ">
               {item.name}
             </h4>
-            {/* Menu */}
             <div className="mt-[15px] flex-1 text-right w-full">
               <ul className="mb-[10px]">
                 <ThongTinSp id={item._id} />
               </ul>
-              {/* List Điện thoại 1 */}
             </div>
           </div>
         );

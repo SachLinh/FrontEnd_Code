@@ -6,34 +6,28 @@ import {useForm } from "react-hook-form";
 
 
 export default function PayInfor() {
+    const user = JSON.parse(localStorage.getItem('user'))
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const userInfo = useRecoilValue(userInfoState);
     const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
     const billInfo = useSetRecoilState(billInfoState);
-    const listProduct = useRecoilValue(cartProductState    );
+    const listProduct = useRecoilValue(cartProductState);
     const nav = useNavigate();
 
     const onSubmit= data => {
-        const uid = userInfo ? userInfo.uid : "null";
-        const d = new Date();
         const productList= [];
         listProduct.map(value => {
             const product= {
-                id: value.id,
-                count: value.count
+                ID_Product: value._id,
+                Count: value.Count
             }
             productList.push(product);
         })
         const bill = {
-            id: d.getDate() + "" + (d.getMonth() + 1) + d.getFullYear() + d.getHours() + d.getMinutes() + d.getSeconds(),
-            productLists: productList,
-            customerName: data.name,
-            customerPhoneNumber: data.phoneNumber,
-            customerEmail: data.email,
-            cutomerAddress: data.detailAddress + "" + data.commune + " " +  data.district + " " + data.city,
-            uid: uid,
-            date: d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear(),
-            totalPrice: totalPrice
+            ID_User: user?.user?._id,
+            Address: data.detailAddress + " " + data.commune + " " +  data.district + " " + data.city,
+            Total: totalPrice,
+            InvoiceDetail:productList
         }
         billInfo(bill);
         nav('/payment')
@@ -42,6 +36,7 @@ export default function PayInfor() {
     const formatPrice = (price) => {
 		return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
 	}
+    console.log(listProduct);
   return (
     <div className="sm:5/6 md:w-7/12 lg:w-1/2 xl:w-5/12 mx-auto mt-16">
     <div className="grid grid-flow-row grid-cols-2 place-content-center">
@@ -96,12 +91,9 @@ export default function PayInfor() {
             <div className="pt-2">
                 <h3 className="text-md font-bold mb-2">Thông tin khách hàng</h3>
                 <div className="grid grid-flow-row grid-cols-1 gap-y-2">
-                    <input {...register("name", { required: true })} type="text" placeholder="Họ và tên (bắt buộc)" className="border border-gray-400 py-1 pl-2 rounded-lg" />
-                    {errors.name && <span className='text-red-600 text-xs'>This field is not valid</span>}
-                    <input {...register("phoneNumber", { required: true, pattern: /(\+84|0)\d{9,10}/i })} placeholder="Số điện thoại (bắt buộc)" className="border border-gray-400 py-1 pl-2 rounded-lg" />
-                    {errors.phoneNumber && <span className='text-red-600 text-xs'>This field is not valid</span>}
-                    <input {...register("email", { required: true, pattern: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i })} placeholder="Email (Vui long nhập email để nhận hóa đơn)" className="border border-gray-400 py-1 pl-2 rounded-lg" />
-                    {errors.email && <span className='text-red-600 text-xs'>This field is not valid</span>}
+                    <input value={user?.user?.name} disabled type="text" placeholder="Họ và tên (bắt buộc)" className="border border-gray-400 py-1 pl-2 rounded-lg" />
+                    <input value={user?.user?.phone} disabled  placeholder="Số điện thoại (bắt buộc)" className="border border-gray-400 py-1 pl-2 rounded-lg" />
+                    <input value={user?.user?.email} disabled placeholder="Email (Vui long nhập email để nhận hóa đơn)" className="border border-gray-400 py-1 pl-2 rounded-lg" />
                 </div>
             </div>
             <div className="pt-2">

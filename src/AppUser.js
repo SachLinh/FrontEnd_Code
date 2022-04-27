@@ -18,6 +18,7 @@ import CompletePayment from "./Components/Carts/CompletePayment";
 import { ToastContainer, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SmemberMain from "./Components/Smember/SmemberMain";
+import Register from "./Components/SignIn/Register";
 
 
 export default function AppUser() {
@@ -27,6 +28,7 @@ export default function AppUser() {
       <Routes>
         <Route path="/" element={<Content />}></Route>
         <Route path="/Smember" element={<Smember />}></Route>
+        <Route path="/Register" element={<Register />}></Route>
         <Route path="/SmemberMain" element={<SmemberMain/>}></Route>
         <Route path="/CuaHang" element={<CuaHang />}></Route>
         <Route path="/SearchOrder" element={<SearchOrder />}></Route>

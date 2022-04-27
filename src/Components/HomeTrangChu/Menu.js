@@ -30,7 +30,7 @@ export default function Menu() {
         >
           <Link
             className="w-full pl-[8px] lg:pl-[15px]"
-            to={`/DanhMucSP/${item.id}`}
+            to={`/DanhMucSP/${item._id}`}
           >
             {item.name}
           </Link>

@@ -6,40 +6,28 @@ import {
 } from 'recoil';
 import axios from 'axios';
 import { billInfoState, cartProductState, totalPriceState } from '../../Recoil/Recoil';
+import { useDispatch } from 'react-redux';
+import { AddNewHoaDon } from '../../Features/HoaDonSlice';
+import { toast } from 'react-toastify';
 
 function Payment() {
-
+    const user = JSON.parse(localStorage.getItem('user'))
     const totalPrice = useRecoilValue(totalPriceState);
     const billInfo = useRecoilValue(billInfoState);
     const setCartProductList = useSetRecoilState(cartProductState);
+    const dispatch = useDispatch()
     useEffect(() => {
-        console.log(billInfo)
     }, [])
 
     const postBill = () => {
-        axios.post('https://6232e62e6de3467dbac2a7d6.mockapi.io/HoaDon', { 
-            subId: billInfo.id,
-            customerName: billInfo.customerName,
-            customerPhoneNumber: billInfo.customerPhoneNumber,
-            customerEmail: billInfo.customerEmail,
-            cutomerAddress: billInfo.cutomerAddress,
-            date: billInfo.date,
-            totalPrice: billInfo.totalPrice,
-            uid: billInfo.uid,
-            productList: billInfo.productLists,
-         })
-            .then(res => {
-                console.log(res);
-            })
+        dispatch(AddNewHoaDon(billInfo))
         localStorage.removeItem('data');
-
         setCartProductList([]);
-
+        toast("Đặt hàng thành công")
     }
     const formatPrice = (price) => {
 		return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
 	}
-
     return (
         <div className="sm:w-5/6 md:w-7/12 lg:w-1/2 xl:w-5/12 mx-auto mt-16">
             <div className="text-center">
@@ -86,11 +74,10 @@ function Payment() {
             <div className="px-2 border border-solid shadow-lg rounded-xl">
                 <div className="mx-1 my-3 px-3 pb-5 text-lg grid grid-flow-row grid-cols-1 gap-y-3 border border-solid shadow-lg rounded-xl">
                     <h2 className="text-center font-bold">THÔNG TIN ĐẶT HÀNG</h2>
-                    <p>Mã Đơn Hàng: <b>{billInfo.id}</b></p>
-                    <p>Người Nhận: <b>{billInfo.customerName}</b></p>
-                    <p>Số Điện Thoại: <b>{billInfo.customerPhoneNumber}</b></p>
-                    <p>Email: <b>{billInfo.customerEmail}</b></p>
-                    <p>Nhận Sản Phẩm Tại: <b>{billInfo.cutomerAddress}</b></p>
+                    <p>Người Nhận: <b>{user?.user?.name}</b></p>
+                    <p>Số Điện Thoại: <b>{user?.user?.phone}</b></p>
+                    <p>Email: <b>{user?.user?.email}</b></p>
+                    <p>Nhận Sản Phẩm Tại: <b>{billInfo.Address}</b></p>
                     <p>Tổng Tiền: <b>{formatPrice(totalPrice)}</b></p>
                 </div>
                 <div className="mb-3">

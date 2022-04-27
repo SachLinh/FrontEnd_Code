@@ -18,6 +18,20 @@ export const createSpecByIDProduct = createAsyncThunk(
     }
   }
 );
+export const getAllThongSo = createAsyncThunk(
+  "/getAllThongSo",
+  // Declare the type your function argument here:
+  async () => {
+    try {
+      const res = await axios.get(
+        `http://192.168.108.107:5000/specifications/`
+      );
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 export const getThongSo = createAsyncThunk(
   "/getThongSo",
   // Declare the type your function argument here:
@@ -39,7 +53,17 @@ export const AllThongSoSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // get promotion
+      // get all thoong so
+      .addCase(getAllThongSo.pending, (state, action) => {
+        state.listThongSo = [];
+      })
+      .addCase(getAllThongSo.fulfilled, (state, action) => {
+        state.listThongSo = action.payload;
+      })
+      .addCase(getAllThongSo.rejected, (state, action) => {
+        state.listThongSo = [];
+      })
+      // get thong so
       .addCase(getThongSo.pending, (state, action) => {
         state.listThongSo = [];
       })
@@ -49,7 +73,7 @@ export const AllThongSoSlice = createSlice({
       .addCase(getThongSo.rejected, (state, action) => {
         state.listThongSo = [];
       })
-       // create new  sp
+       // create new  thong so
        .addCase(createSpecByIDProduct.pending, (state, action) => {
         state.listThongSo = [];
       })

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { billInfoState } from '../../Recoil/Recoil';
+import { billInfoState, totalPriceState } from '../../Recoil/Recoil';
 
 function CompletePayment() {
-
+    const user = JSON.parse(localStorage.getItem('user'))
+    const totalPrice = useRecoilValue(totalPriceState);
     const billInfo = useRecoilValue(billInfoState);
     const formatPrice = (price)=> {
 		return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
@@ -24,15 +25,14 @@ function CompletePayment() {
             <div className="px-2 border border-solid shadow-lg rounded-xl">
                 <div className="mx-1 my-3 px-3 pb-5 text-lg text-red-600 bg-[#f6f6f6] grid grid-flow-row grid-cols-1 gap-y-3 border border-solid shadow-lg rounded-xl">
                     <h2 className="text-center font-bold">ĐẶT HÀNH THÀNH CÔNG</h2>
-                    <p>Mã Đơn Hàng: <b>{billInfo.id}</b></p>
-                    <p>Người Nhận: <b>{billInfo.customerName}</b></p>
-                    <p>Số Điện Thoại: <b>{billInfo.customerPhoneNumber}</b></p>
-                    <p>Email: <b>{billInfo.customerEmail}</b></p>
-                    <p>Nhận Sản Phẩm Tại: <b>{billInfo.cutomerAddress}</b></p>
-                    <p>Tổng Tiền: <b>{formatPrice(billInfo.totalPrice)}</b></p>
+                    <p>Người Nhận: <b>{user?.user?.name}</b></p>
+                    <p>Số Điện Thoại: <b>{user?.user?.phone}</b></p>
+                    <p>Email: <b>{user?.user?.email}</b></p>
+                    <p>Nhận Sản Phẩm Tại: <b>{billInfo.Address}</b></p>
+                    <p>Tổng Tiền: <b>{formatPrice(totalPrice)}</b></p>
                 </div>
-                {
-                    billInfo.productLists.map((product, key) => {
+                {/* {
+                    billInfo.map((product, key) => {
                         <div className="px-2 mt-3 border border-solid shadow-lg rounded-xl">
                             <div className="p-3 m-2 grid grid-flow-col grid-cols-3 border border-solid rounded-lg">
                                 <div className="">
@@ -51,7 +51,7 @@ function CompletePayment() {
                             </div>
                         </div>
                     })
-                }
+                } */}
                 <div className="my-3 grid grid-flow-col grid-cols-2 gap-x-3 text-sm">
                     <div className="text-center bg-blue-600 text-white font-bold py-2 rounded-xl cursor-pointer">
                         <p>KIỂM TRA ĐƠN HÀNG</p>

@@ -25,8 +25,23 @@ export const getChiTietHoaDon= createAsyncThunk('/AllChiTietHD',
             console.log(error);
         }
     }
-  )
-
+)
+export const AddNewHoaDon = createAsyncThunk(
+    "/AddNewHoaDon",
+    // Declare the type your function argument here:
+    async (payload) => {
+        console.log('payload', payload);
+      try {
+        const res = await axios.post(
+          `http://localhost:5000/invoice`, payload
+        );
+        return res.data;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  );
+  
   export const AllHoaDon = createSlice(
     {
         name:"Hoadon",
@@ -55,6 +70,16 @@ export const getChiTietHoaDon= createAsyncThunk('/AllChiTietHD',
             })
             .addCase(getChiTietHoaDon.rejected,(state,action)=>{
               
+            })
+            // //Add hoa don
+            .addCase(AddNewHoaDon.pending,(state,action)=>{
+                state.listHoaDon = [];
+            })
+            .addCase(AddNewHoaDon.fulfilled,(state,action)=>{
+                state.listHoaDon = action.payload;
+            })
+            .addCase(AddNewHoaDon.rejected,(state,action)=>{
+                state.listHoaDon = [];
             })
         }
     }

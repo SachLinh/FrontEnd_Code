@@ -1,15 +1,47 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../../Features/AuthSlice";
 
 export default function YourAccount() {
- const user = JSON.parse(localStorage.getItem("user"))
+  const user = JSON.parse(localStorage.getItem("user"))
+  const [formData, setformData] = useState({
+    password: ""
+  });
+  const [oldPass, setOldPass] = useState({passCu:""})
+  const {password} = formData
+  const {passCu} = oldPass
+  const init = {
+    id:user?.user?._id
+  }
+  const dispatch = useDispatch()
+  const onChangePassMoi = (e) => {
+    setformData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };console.log(password);
+  const onChangePassCu = (e) => {
+    setOldPass({
+      ...oldPass,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const UpdateAccountPass = async (e) => {
+    e.preventDefault();
+    if(user?.user)
+    {
+      dispatch(updateUser({init, formData}))
+    }
+    
+  };
   return (
     <div className="col-start-2 col-span-3 border-[1px] border-gray-300 rounded-xl text-center md:mt-[0px] mt-[15px]">
       <p className="text-[25px] mx-auto text-red-600">Xin chào</p>
-      <h2 className="font-semibold text-red-600 text-3xl">{user.user.name}</h2>
+      <h2 className="font-semibold text-red-600 text-3xl">{user?.user ? user?.user?.name : ""}</h2>
+      {user?.user ? 
       <div className="w-full flex flex-col justify-between items-center">
-        <div className="w-full flex flex-row justify-around items-center">
-          <div className="">
+        <div className="w-full flex flex-row justify-start items-center">
+          <div className="w-[300px]">
             <p className="text-sm lg:text-lg md:text-md">Email</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +61,7 @@ export default function YourAccount() {
               {user.user.email}
             </p>
           </div>
-          <div className="">
+          <div className="w-[300px]">
             <p className="text-sm lg:text-lg md:text-md">Phone</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -51,8 +83,8 @@ export default function YourAccount() {
           </div>
         </div>
         <div className="h-[50px]"></div>
-        <form className="form w-full flex flex-row justify-around items-center mb-[50px]">
-          <div className="flex flex-col justify-around items-center">
+        {/* <form className="form w-full flex flex-row justify-start items-end mb-[50px]" onSubmit={UpdateAccountPass}>
+          <div className="w-[300px] flex flex-col justify-around items-center">
             <label
               htmlFor="inputPassword"
               className="text-sm lg:text-lg md:text-md"
@@ -62,26 +94,31 @@ export default function YourAccount() {
             <i className="fa-solid fa-key text-[50px] h-12 w-12 my-[5px] text-red-600"></i>
             <input
               type="password"
-              className="form-control"
-              id="inputPassword"
+              className="form-control w-[80%]"
+              name="passCu"
               placeholder="Password Old"
+              value={passCu}
+              onChange={onChangePassCu}
               required
-            />S
+            />
           </div>
-          <div className="flex flex-col justify-around items-center">
+          <div className="w-[300px] flex flex-col justify-around items-center">
             <label
-              htmlFor="inputPassword"
+              htmlFor="inputPasswordMoi"
               className="text-sm lg:text-lg md:text-md"
             >
               Password Moi
             </label>
             <i className="fa-brands fa-keycdn  text-[50px] h-12 w-12 my-[5px] text-red-600"></i>
             <input
-              type="passwordMoi"
-              className="form-control"
-              id="inputPassword"
+              type="password"
+              className="form-control w-[80%]"
+              name="password"
+              value={password}
               placeholder="Password new"
               required
+              onChange={onChangePassMoi}
+              pattern="[0-9a-zA-Z]{6}"
             />
           </div>
           <input
@@ -89,8 +126,10 @@ export default function YourAccount() {
             className="btn btn-primary text-[#f53939]"
             value="Đổi mật khẩu"
           />
-        </form>
+        </form> */}
       </div>
+      : ""}
+     
     </div>
   );
 }

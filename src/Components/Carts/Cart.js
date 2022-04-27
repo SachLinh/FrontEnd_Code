@@ -16,29 +16,23 @@ export default function Cart() {
     if (JSON.parse(localStorage.getItem("data") + "") !== null) {
       JSON.parse(localStorage.getItem("data") + "").map((value) => {
         const product = {
-          id: value.id,
-          image: value.avatar,
-          name: value.name,
-          price: convertPrice(value.cost),
-          oldPrice: convertPrice(value.oldCost),
-          promotion: value.promotion,
-          endow: value.endow,
-          count: 1,
+          _id: value._id,
+          Image: value.Image,
+          Name: value.Name,
+          Price: value.Price,
+          Endow: value.Endow,
+          Color:value.Color,
+          Count: 1,
+          ID_Cata:value.ID_Cata,
+          ID_Promotion: value.ID_Promotion,
+          ID_Spec: value.ID_Spec
         };
-        price += product.price * product.count;
+        price += product.Price * product.Count;
         cartProduct.push(product);
       });
       setListCart(cartProduct);
       setTotal(price);
     }
-  };
-  const convertPrice = (price) => {
-    const prices = price.split(".");
-    return (
-      parseInt(prices[0]) * 1000000 +
-      parseInt(prices[1]) * 1000 +
-      parseInt(prices[2])
-    );
   };
   const formatPrice = (price) => {
     return new Intl.NumberFormat("vi-VN", {
@@ -60,7 +54,6 @@ export default function Cart() {
   useEffect(() => {
     getListCart();
   }, []);
-
   return (
     <div className="sm:w-5/6 md:w-2/3 lg:w-1/2 xl:w-5/12 mx-auto mt-16">
       <div className="grid grid-flow-row grid-cols-2 place-content-center">
@@ -102,9 +95,9 @@ export default function Cart() {
                 {formatPrice(total)}
               </p>
             </div>
-            <Link to={user.toKen ? `/payment-infor` : `/Smember`}>
+            <Link to={user?.toKen ? `/payment-infor` : `/Smember`}>
               <div className="text-center bg-red-600 text-white font-bold py-4 rounded-md mb-2 cursor-pointer">
-                <p>TIẾN HÀNH ĐẶT HÀNG</p>
+                <p>{user?.toKen ? `TIẾN HÀNH ĐẶT HÀNG` : `Vui lòng đăng nhập để đặt hàng`}</p>
               </div>
             </Link>
             <Link to="/">
