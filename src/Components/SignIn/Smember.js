@@ -33,7 +33,7 @@ function Smember() {
 
 
   return (
-    <div className="w-full mx-auto h-full mt-[30px] md:mb-[100px] mb-[0px] lg:mb-[0px] sm:mb-[0px]">
+    <div className="w-full mx-auto h-full mt-[50px] md:mb-[100px] mb-[0px] lg:mb-[0px] sm:mb-[0px]">
       <section className="w-full h-full gradient-form bg-[#fff9ef] md:h-screen">
         <div className="container py-12 px-6 h-full">
           <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">

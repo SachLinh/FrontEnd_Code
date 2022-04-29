@@ -5,7 +5,7 @@ export default function CuaHang() {
   return (
     <div className="w-full flex flex-row justify-center">
       <div
-      className="mt-[100px] 
+      className="mt-[130px] 
         2xl:w-[1300px] 
         xl:w-[1200px] 
         lg:w-[1000px]

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import { logout } from "../../Features/AuthSlice";
+import LichSuMuaHang from "./LichSuMuaHang";
 import YourAccount from "./YourAccount";
 
 function SmemberMain() {
@@ -35,7 +36,7 @@ function SmemberMain() {
 
   return (
     <div
-      className="mt-20 w-11/12 mx-auto
+      className="mt-[130px] w-11/12 mx-auto
         2xl:w-[1300px] 
 		xl:w-[1200px]
 		lg:w-[1000px] 
@@ -44,7 +45,7 @@ function SmemberMain() {
 		w-[400px]'
         md:grid md:grid-flow-col grid-flow-col gap-3"
     >
-      <div className="rounded-2xl shadow-xl border-[1px] border-gray-300 h-max">
+      <div className="rounded-2xl shadow-xl border-[1px]  bg-gradient-to-r from-[#fde4be] to-[#f5a9dc]  border-gray-300 h-max">
         <Link to="">
           <div className="grid grid-flow-row grid-cols-5 m-2 p-2 nav nav-active cursor-pointer">
             <svg
@@ -66,9 +67,8 @@ function SmemberMain() {
             </p>
           </div>
         </Link>
-        <Link to="lich-su-mua-hang">
+        <Link to="LichSuMuaHang">
           <div
-            onClick={setActiveNav}
             className="grid grid-flow-row grid-cols-5 m-2 p-2 nav nav-non-active cursor-pointer"
           >
             <svg
@@ -116,7 +116,7 @@ function SmemberMain() {
       </div>
       <Routes>
         <Route path="/" element={<YourAccount/>}></Route>
-        {/* <Route path="/lich-su-mua-hang" element={<PaymentHistory />}></Route> */}
+        <Route path="/LichSuMuaHang" element={<LichSuMuaHang/>} ></Route>
       </Routes>
     </div>
   );

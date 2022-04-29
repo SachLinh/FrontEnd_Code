@@ -54,7 +54,7 @@ function ProductDetail() {
     }).format(price);
   };
   return (
-    <div className="w-full">
+    <div className="w-full mt-[50px]">
       <div className="flex justify-center items-center text-center">
         <div
           className="font-sans 2xl:w-[1300px] relative xl:w-[1200px] 

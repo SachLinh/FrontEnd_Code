@@ -1,6 +1,5 @@
 /** @format */
 
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllDanhMuc } from "../../Features/MenuSlice";
@@ -28,7 +27,7 @@ export default function Body() {
             </h4>
             <div className="mt-[15px] flex-1 text-right w-full">
               <ul className="mb-[10px]">
-                <ThongTinSp id={item._id} />
+                <ThongTinSp id={item._id}/>
               </ul>
             </div>
           </div>

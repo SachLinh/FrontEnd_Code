@@ -36,9 +36,8 @@ export default function PayInfor() {
     const formatPrice = (price) => {
 		return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
 	}
-    console.log(listProduct);
   return (
-    <div className="sm:5/6 md:w-7/12 lg:w-1/2 xl:w-5/12 mx-auto mt-16">
+    <div className="sm:5/6 md:w-7/12 lg:w-1/2 xl:w-5/12 mx-auto mt-[130px]">
     <div className="grid grid-flow-row grid-cols-2 place-content-center">
         <Link to="/cart">
             <div onClick={() => setTotalPrice(0)}>

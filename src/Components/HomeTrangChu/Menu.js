@@ -24,64 +24,36 @@ export default function Menu() {
     var showListCata = list.map((item, index) => {
       return (
         <li
-          className="w-full h-full hover:bg-[#d6d3d3] p-[4px] lg:p-[6px] first:rounded-t-2xl last:rounded-b-2xl 
+          className="w-full h-full hover:bg-[#f5edf5] p-[4px] lg:p-[6px] first:rounded-t-2xl last:rounded-b-2xl 
         pl-[10px] flex flex-row justify-between items-center group transition-transform-[0,25s]"
           key={index}
-        >
+        >          
+        <i className="fa-solid fa-angle-right pl-[15px]"></i>
           <Link
             className="w-full pl-[8px] lg:pl-[15px]"
             to={`/DanhMucSP/${item._id}`}
           >
             {item.name}
           </Link>
-          <i className="fa-solid fa-angle-right pr-[15px]"></i>
         </li>
       );
     });
   }
-
-  let [open, setOpen] = useState(false);
   //// render
   return (
-    <div className="w-full mt-[30px] lg:mt-[25px] xl:mt-[10px] sm:mt-[40px] mb-[20px] font-Roboto text-[14px] h-[300px] lg:h-[376px]">
-      <div className="relative flex md:flex-row flex-col justify-between w-full h-full">
+    <div className="w-full py-[30px] font-Roboto text-[14px] h-[500px] rounded-xl">
+      <div className="flex flex-row justify-around w-full h-full">
         <div
-          onClick={() => {
-            setOpen(!open);
-          }}
-          className="absolute text-xl top-[2px] cursor-pointer block md:hidden font-Roboto"
+          className={`text-[#030303] h-full rounded-xl shadow-[0_0px_5px_2px_#9b9a9a] w-[17%]`}
         >
-          <i
-            className={
-              open
-                ? "fa-solid fa-xmark ml-[10px] mr-[10px]"
-                : "fa-solid fa-bars ml-[10px] mr-[10px]"
-            }
-          ></i>
-          Danh Mục
-        </div>
-        <div
-          className={`absolute md:static bg-[#e02323] text-[#fff] md:text-inherit md:bg-inherit  transition-all duration-700 
-        md:w-[20%] lg:w-[15%] h-full rounded-2xl shadow-[0_0px_5px_2px_#9b9a9a]
-        ${
-          open
-            ? "top-[35px] left-[0px] z-20 opacity-100"
-            : "left-[-500px] top-[35px] z-20"
-        }
-         w-[30%] h-full opacity-100
-         `}
-        >
-          <ul className="w-full h-full flex flex-col justify-between font-[500]">
+          <ul className="w-full h-full flex flex-col justify-between font-[500]  bg-[#ffffff] rounded-xl">
             {list ? showListCata : "khong co data"}
           </ul>
         </div>
         <div
-          className="md:mt-[0px] mt-[40px] rounded-2xl shadow-[#9e9c9c] 
-        w-[98%] md:w-[56%] h-full lg:w-[68%] 
-        shadow-[0_0px_5px_2px_#9b9a9a] sm:mx-[0px] mx-[10px]"
-        >
+          className="md:mt-[0px] mt-[40px] rounded-2xl shadow-[#9e9c9c]  w-[78%] shadow-[0_0px_5px_2px_#9b9a9a] sm:mx-[0px] mx-[10px]">
           <Swiper
-            className="w-full h-full lg:h-[304px]"
+            className="w-full h-full"
             loop={true}
             spaceBetween={10}
             autoplay={{
@@ -127,71 +99,6 @@ export default function Menu() {
               />
             </SwiperSlide>
           </Swiper>
-          <Swiper
-            className="w-full lg:flex flex-row justify-between 
-            lg:h-[72px] hidden text-[11px] lg:text-[12px] text-[#340a40]"
-            onSwiper={setThums}
-            loop={true}
-            spaceBetween={10}
-            slidesPerView={4}
-            freeMode={true}
-            watchSlidesProgress={true}
-            modules={[FreeMode, Navigation, Thumbs]}
-          >
-            <SwiperSlide className="w-full h-full flex flex-col justify-center items-center p-[1px] lg:p-[2px] hover:bg-[#f3f4f6] hover:rounded-b-2xl active:border-b-2 active:border-b-black">
-              <Link to="" className="text-[11px] lg:text-[12px]">
-                GALAXY A53
-              </Link>
-              <p>Ưu đãi siêu khủng</p>
-            </SwiperSlide>
-            <SwiperSlide className="w-full h-full flex flex-col justify-center items-center p-[1px] lg:p-[2px] hover:bg-[#f3f4f6] ">
-              <Link to="" className="text-[11px] lg:text-[12px]">
-                XIAOMI 12 SERTIES
-              </Link>
-              <p>Quà cực xịn</p>
-            </SwiperSlide>
-            <SwiperSlide className="w-full h-full flex flex-col justify-center items-center p-[1px] lg:p-[2px] hover:bg-[#f3f4f6] ">
-              <Link to="" className="text-[11px] lg:text-[12px]">
-                OPPO ZENO7 SERIES
-              </Link>
-              <p>Đặt trước nhiều quà</p>
-            </SwiperSlide>
-            <SwiperSlide className="w-full h-full flex flex-col justify-center items-center p-[1px] lg:p-[2px] hover:bg-[#f3f4f6] ">
-              <Link to="" className="text-[11px] lg:text-[12px]">
-                VIVOBOOK 13 OLED
-              </Link>
-              <p>Mở bán quà ngon</p>
-            </SwiperSlide>
-            <SwiperSlide className="w-full h-full flex flex-col justify-center items-center p-[1px] lg:p-[2px] hover:bg-[#f3f4f6]  hover:rounded-b-2xl ">
-              <Link to="" className="text-[11px] lg:text-[12px]">
-                IPAD 12.2 2021
-              </Link>
-              <p>Giá cực sốc</p>
-            </SwiperSlide>
-          </Swiper>
-        </div>
-        <div className="sm:w-[20%] md:h-full lg:w-[15%] md:flex md:flex-col md:justify-around md:items-start hidden">
-          <Link to="" className="w-full h-[80%]">
-            <img
-              src={require(`./Images/banner1.png`)}
-              alt=""
-              className="w-full h-[90%] rounded-2xl shadow-[0_0px_5px_2px_#9b9a9a]"
-            />
-          </Link>
-          <Link to="" className="w-full h-[80%] flex flex-col justify-center">
-            <img
-              src={require(`./Images/banner2.png`)}
-              alt=""
-              className="w-full h-[90%] rounded-2xl shadow-[0_0px_5px_2px_#9b9a9a]"
-            />
-          </Link>
-          <Link to="" className="w-full h-[80%] flex flex-col justify-end">
-            <img
-              src={require(`./Images/Right_banner_AW.png`)}
-              alt="hinh anh"
-              className="w-full h-[90%] rounded-2xl shadow-[0_0px_5px_2px_#9b9a9a]"
-            />
-          </Link>
         </div>
       </div>
     </div>

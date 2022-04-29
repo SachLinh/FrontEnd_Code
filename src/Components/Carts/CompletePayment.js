@@ -7,12 +7,13 @@ function CompletePayment() {
     const user = JSON.parse(localStorage.getItem('user'))
     const totalPrice = useRecoilValue(totalPriceState);
     const billInfo = useRecoilValue(billInfoState);
+    console.log('billInfor', billInfo);
     const formatPrice = (price)=> {
 		return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
 	}
-
+    console.log('billIFor', billInfo);
     return (
-        <div className="sm:w-5/6 md:w-7/12 lg:w-1/2 xl:w-5/12 mx-auto mt-16">
+        <div className="sm:w-5/6 md:w-7/12 lg:w-1/2 xl:w-5/12 mx-auto mt-[130px]">
             <div className="grid grid-flow-row grid-cols-2 place-content-center">
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 inline text-red-600" viewBox="0 0 20 20" fill="currentColor">
@@ -31,27 +32,6 @@ function CompletePayment() {
                     <p>Nhận Sản Phẩm Tại: <b>{billInfo.Address}</b></p>
                     <p>Tổng Tiền: <b>{formatPrice(totalPrice)}</b></p>
                 </div>
-                {/* {
-                    billInfo.map((product, key) => {
-                        <div className="px-2 mt-3 border border-solid shadow-lg rounded-xl">
-                            <div className="p-3 m-2 grid grid-flow-col grid-cols-3 border border-solid rounded-lg">
-                                <div className="">
-                                    <img src={product.image} className="w-3/4" alt="product in cart" />
-                                </div>
-                                <div className="col-start-2 col-span-2">
-                                    <p className="font-bold">{product.name}</p>
-                                    <div className="grid grid-flow-row grid-cols-4">
-                                        <p className="text-sm text-red-600 font-semibold pt-1">{product.price} ₫</p>
-                                        <p className="text-sm text-[#777] line-through font-light pt-1">{product.oldPrice} ₫</p>
-                                    </div>
-                                    <p>Giá: {product.price} ₫</p>
-                                    <p>Số Lượng: 1</p>
-                                    <p>Tổng tiền: {product.oldPrice} ₫</p>
-                                </div>
-                            </div>
-                        </div>
-                    })
-                } */}
                 <div className="my-3 grid grid-flow-col grid-cols-2 gap-x-3 text-sm">
                     <div className="text-center bg-blue-600 text-white font-bold py-2 rounded-xl cursor-pointer">
                         <p>KIỂM TRA ĐƠN HÀNG</p>

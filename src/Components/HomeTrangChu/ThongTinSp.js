@@ -26,69 +26,61 @@ export default function ThongTinSp(props) {
         return (
           <div
             key={indexSP}
-            className="text-left bg-white mt-3 
-                                      2xl:w-[230px] xl:w-[210px] lg:w-[210px] md:w-[180px] sm:w-[150px] w-[150px]
-                                       2xl:h-[370px] xl:h-[340px] lg:h-[320px] md:h-[300px] sm:h-[250px] h-[220px]
-                                       p-[5px]
-                                      mr-[10px] rounded-lg re cursor-pointer duration-500 
-                                      shadow-[0_0px_4px_4px_#b6b5b5] hover:shadow-[0_0px_8px_8px_#868585]"
+            className="text-left mt-3 w-[326px] h-[543px] p-[5px] mr-[10px]
+            cursor-pointer"
           >
             <Link
-              className="w-full h-full flex flex-col justify-start items-start"
+              className="relative w-full h-full flex flex-col justify-start items-center"
               to={`/product-detail/${itemSP._id}`}
             >
               <p
-                className="bg-red-600 
-                                           2xl:h-[30px] 2xl:w-[100px] 2xl:leading-[30px] 2xl:text-[17px]
-                                           xl:h-[30px] xl:w-[100px] xl:leading-[30px] xl:text-[15px]
-                                           lg:h-[30px] lg:w-[100px] lg:leading-[30px] lg:text-[15px]
-                                           md:h-[30px] md:w-[100px] md:leading-[30px] md:text-[14px]
-                                           sm:h-[25px] sm:w-[70px] sm:leading-[25px] sm:text-[12px]
-                                           mb-2 text-center rounded-lg  text-white font-bold right-2 bottom-1 text-[10px] 
-                                           w-[60px] mt-[5px]  "
+                className="bg-[#4b7059] absolute top-[45px] left-[-7px] z-30
+                            h-[30px] w-[100px] text-[17px]
+                            text-center rounded-[15px]  text-white font-bold right-2 bottom-1 "
               >
-                Giảm <span>{khuyenMai?.listPromotion?.pros ? khuyenMai?.listPromotion?.pros.map((pros)=>{
-                  if(pros._id === itemSP.ID_Promotion)
-                  {
-                    return pros.value
-                  }
-                }) : ""}%</span>
+                Giảm{" "}
+                <span>
+                  {khuyenMai?.listPromotion?.pros
+                    ? khuyenMai?.listPromotion?.pros.map((pros) => {
+                        if (pros._id === itemSP.ID_Promotion) {
+                          return pros.value;
+                        }
+                      })
+                    : ""}
+                  %
+                </span>
               </p>
-              <img
-                alt=""
-                src={itemSP.Image}
-                className="2xl:w-[160px] 2xl:h-[160px] 2xl:mt-[15px]
-                                              xl:w-[150px] xl:h-[150px] xl:mt-[14px]
-                                              lg:w-[140px] lg:h-[140px] lg:mt-[14px]
-                                              md:w-[130px] md:h-[130px] md:mt-[12px]
-                                              sm:w-[110px] sm:h-[110px] sm:mt-[10px]
-                                              text-center m-auto w-[95px] h-[95px] mt-[5px]
-                                              "
-              ></img>
+              <div className="w-full h-[408px] overflow-hidden">
+                <img
+                  alt=""
+                  src={itemSP.Image}
+                  className="w-full h-full
+                        text-center hover:scale-110 hover:rotate-12  transition-all duration-500"
+                ></img>
+              </div>
+              <h4 className="m-[5px] text-[#807e7e] text-[16px] ">
+                
+              </h4>
               <h4
-                className="font-bold m-[5px] text-gray-800 text-[9px]
-                                          2xl:text-[16px]
-                                          xl:text-[15px]
-                                          lg:text-[14px]
-                                          md:text-[12px]
-                                          sm:text-[10px]
+                className="font-bold m-[5px] text-gray-800 text-[16px]
                                           "
               >
                 {itemSP.Name}
               </h4>
-              <div
-                className="flex text-[9px]
-                                          2xl:text-[17px]
-                                          xl:text-[15px]
-                                          md:text-[13px]
-                                          sm:text-11px]"
-              >
-                <p className="text-red-600 font-bold  m-1 ">
-                {formatPrice(itemSP.Price)}
-                </p>
-                <p className="mt-1 ml-2 line-through text-gray-500">
-                {formatPrice(itemSP.Price + 2000000)}
+              <div className="text-[#f7da36]">
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              </div>
+              <div className="flex">
+                <p className="text-[13px] mt-1 ml-2 line-through text-gray-500">
+                  {formatPrice(itemSP.Price + 2000000)}
                   <span></span>
+                </p>
+                <p className="text-[#030303] font-bold  m-1 ">
+                  {formatPrice(itemSP.Price)}
                 </p>
               </div>
               <div
@@ -96,13 +88,8 @@ export default function ThongTinSp(props) {
                               "
               >
                 <span
-                  className="p-[8px] text-[7px] w-full md:h-[40px] lg:h-[50px] sm:h-[35px] h-[30px]
-                                2xl:text-[12px]
-                                xl:text-[11px]
-                                lg:text-[10px]
-                                md:text-[9px]
-                                sm:text-[8px]
-                                endow
+                  className="p-[8px] w-full h-[50px]
+                                text-[12px]
                                 "
                 >
                   {itemSP.Endow}

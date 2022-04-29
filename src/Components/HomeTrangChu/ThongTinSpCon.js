@@ -39,16 +39,16 @@ export default function ThongTinSpCon(props) {
   const funcSort = function (list) {
     let res = [...list];
     if (sortId === "1") {
-      res.sort((a, b) => (parseInt(a.cost) > parseInt(b.cost) ? 1 : -1));
+      res.sort((a, b) => (parseInt(a.Price) > parseInt(b.Price) ? 1 : -1));
     } else {
       if (sortId === "2") {
-        res.sort((a, b) => (parseInt(a.cost) < parseInt(b.cost) ? 1 : -1));
+        res.sort((a, b) => (parseInt(a.Price) < parseInt(b.Price) ? 1 : -1));
       } else {
         if (sortId === "3") {
-          res.sort((a, b) => (a.name > b.name ? 1 : -1));
+          res.sort((a, b) => (a.Name > b.Name ? 1 : -1));
         } else {
           if (sortId === "4") {
-            res.sort((a, b) => (a.name < b.name ? 1 : -1));
+            res.sort((a, b) => (a.Name < b.Name ? 1 : -1));
           }
         }
       }
@@ -61,33 +61,23 @@ export default function ThongTinSpCon(props) {
       currency: "VND",
     }).format(price);
   };
-  if(listTTSp)
-  {
+  if (listTTSp) {
     var ShowLoaiSP = funcSort(listTTSp.product).map((itemSP, indexSP) => {
       if (itemSP.ID_Cata === props.idLoai) {
         return (
           <div
             key={indexSP}
-            className="text-left bg-white mt-3 
-                                    2xl:w-[230px] xl:w-[210px] lg:w-[210px] md:w-[180px] sm:w-[150px] w-[150px]
-                                     2xl:h-[370px] xl:h-[340px] lg:h-[320px] md:h-[300px] sm:h-[250px] h-[220px]
-                                     p-[5px]
-                                    mr-[10px] rounded-lg re cursor-pointer duration-500 
-                                    shadow-[0_0px_4px_4px_#b6b5b5] hover:shadow-[0_0px_8px_8px_#868585]"
+            className="text-left mt-3 w-[326px] h-[543px] p-[5px] mr-[10px]
+            cursor-pointer"
           >
             <Link
-              className="w-full h-full flex flex-col justify-start items-start"
+              className="relative w-full h-full flex flex-col justify-start items-center"
               to={`/product-detail/${itemSP._id}`}
             >
               <p
-                className="bg-red-600 
-                                         2xl:h-[30px] 2xl:w-[100px] 2xl:leading-[30px] 2xl:text-[17px]
-                                         xl:h-[30px] xl:w-[100px] xl:leading-[30px] xl:text-[15px]
-                                         lg:h-[30px] lg:w-[100px] lg:leading-[30px] lg:text-[15px]
-                                         md:h-[30px] md:w-[100px] md:leading-[30px] md:text-[14px]
-                                         sm:h-[25px] sm:w-[70px] sm:leading-[25px] sm:text-[12px]
-                                         mb-2 text-center rounded-lg  text-white font-bold right-2 bottom-1 text-[10px] 
-                                         w-[60px] mt-[5px]  "
+                className="bg-[#4b7059] absolute top-[45px] left-[-7px] z-30
+                            h-[30px] w-[100px] text-[17px]
+                            text-center rounded-[15px]  text-white font-bold right-2 bottom-1 "
               >
                 Giảm{" "}
                 <span>
@@ -101,56 +91,47 @@ export default function ThongTinSpCon(props) {
                   %
                 </span>
               </p>
-              <img
-                alt=""
-                src={itemSP.Image}
-                className="2xl:w-[160px] 2xl:h-[160px] 2xl:mt-[15px]
-                                            xl:w-[150px] xl:h-[150px] xl:mt-[14px]
-                                            lg:w-[140px] lg:h-[140px] lg:mt-[14px]
-                                            md:w-[130px] md:h-[130px] md:mt-[12px]
-                                            sm:w-[110px] sm:h-[110px] sm:mt-[10px]
-                                            text-center m-auto w-[95px] h-[95px] mt-[5px]
-                                            "
-              ></img>
+              <div className="w-full h-[408px] overflow-hidden">
+                <img
+                  alt=""
+                  src={itemSP.Image}
+                  className="w-full h-full
+                        text-center hover:scale-110 hover:rotate-12  transition-all duration-500"
+                ></img>
+              </div>
+              <h4 className="m-[5px] text-[#807e7e] text-[16px] ">
+                
+              </h4>
               <h4
-                className="font-bold m-[5px] text-gray-800 text-[9px]
-                                        2xl:text-[16px]
-                                        xl:text-[15px]
-                                        lg:text-[14px]
-                                        md:text-[12px]
-                                        sm:text-[10px]
-                                        "
+                className="font-bold m-[5px] text-gray-800 text-[16px]
+                                          "
               >
                 {itemSP.Name}
               </h4>
-              <div
-                className="flex text-[9px]
-                                        2xl:text-[17px]
-                                        xl:text-[15px]
-                                        md:text-[13px]
-                                        sm:text-11px]"
-              >
-                <p className="text-red-600 font-bold  m-1 ">
-                  {formatPrice(itemSP.Price)}
-                </p>
-                <p className="mt-1 ml-2 line-through text-gray-500">
+              <div className="text-[#f7da36]">
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              </div>
+              <div className="flex">
+                <p className="text-[13px] mt-1 ml-2 line-through text-gray-500">
                   {formatPrice(itemSP.Price + 2000000)}
                   <span></span>
+                </p>
+                <p className="text-[#030303] font-bold  m-1 ">
+                  {formatPrice(itemSP.Price)}
                 </p>
               </div>
               <div
                 className="text-black my-1 flex flex-row justify-center w-full bg-gray-200 rounded-md pt-auto
-                            "
+                              "
               >
                 <span
-                  className="p-[8px] text-[7px] w-full md:h-[40px] lg:h-[50px] sm:h-[35px] h-[30px]
-                              2xl:text-[12px]
-                              xl:text-[11px]
-                              lg:text-[10px]
-                              md:text-[9px]
-                              sm:text-[8px]
-                              endow
-                              "
+                  className="p-[8px] w-full h-[50px]
+                                text-[12px]
+                                "
                 >
                   {itemSP.Endow}
                 </span>
@@ -163,25 +144,29 @@ export default function ThongTinSpCon(props) {
   }
 
   return (
-    <div className="w-full flex flex-col justify-start items-start">
-      <div className="w-full mt-[10px]">
-        <h2 className="mb-[20px] md:text-[30px] text-[20px] font-Roboto font-[400]">
+    <div className="w-full flex flex-row justify-start items-start">
+      <div className="mt-[10px] w-[30%] mr-[20px]">
+        <h2 className="mb-[20px] md:text-[30px] text-[20px] font-Roboto font-[500] uppercase">
+          Điện thoại Samsung
+        </h2>
+        <hr></hr>
+        <h2 className="my-[20px] text-[20px] font-Roboto font-[400]">
           Sắp xếp theo
         </h2>
-        <div className="lg:w-[50%] md:w-[70%] w-[80%] flex 2xl:flex-row xl:flex-row sm:justify-between justify-start flex-wrap items-start">
+        <div className="flex flex-col justify-between items-start h-[200px]">
           <button
             type="button"
-            className="btn btn-primary btn-sm text-[#fc3737] sm:mb-[0px] mb-[5px] rounded-xl mr-[5px] md:mr-[0px] text-[11px] sm:text-[12px] md:text-[13px] lg:text-[15px]"
+            className="w-[150px] text-left py-[8px] pl-[6px] border rounded-xl hover:text-[#d4342f] hover:bg-[#fff]"
             onClick={() => {
               handleSort(SORT.upPrice);
             }}
           >
-            <i className="fa-solid fa-arrow-up-wide-short mr-[5px] text-black"></i>
+            <i className="fa-solid fa-arrow-up-wide-short mr-[5px] text-black "></i>
             Giá tăng dần
           </button>
           <button
             type="button"
-            className="btn btn-primary btn-sm text-[#fc3737] sm:mb-[0px] mb-[5px] rounded-xl mr-[5px] md:mr-[0px] text-[11px] sm:text-[12px] md:text-[13px] lg:text-[15px]"
+            className="w-[150px] text-left py-[8px] pl-[6px] border rounded-xl hover:text-[#d4342f] hover:bg-[#fff]"
             onClick={() => {
               handleSort(SORT.downPrice);
             }}
@@ -191,7 +176,7 @@ export default function ThongTinSpCon(props) {
           </button>
           <button
             type="button"
-            className="btn btn-primary btn-sm text-[#fc3737] sm:mb-[0px] mb-[5px] rounded-xl mr-[5px] md:mr-[0px] text-[11px] sm:text-[12px] md:text-[13px] lg:text-[15px]"
+            className="w-[150px] text-left py-[8px] pl-[6px] border rounded-xl hover:text-[#d4342f] hover:bg-[#fff]"
             onClick={() => {
               handleSort(SORT.upname);
             }}
@@ -201,7 +186,7 @@ export default function ThongTinSpCon(props) {
           </button>
           <button
             type="button"
-            className="btn btn-primary btn-sm  text-[#fc3737] sm:mb-[0px] mb-[5px] rounded-xl mr-[5px] md:mr-[0px] text-[11px] sm:text-[12px] md:text-[13px] lg:text-[15px]"
+            className="w-[150px] text-left py-[8px] pl-[6px] border rounded-xl hover:text-[#d4342f] hover:bg-[#fff]"
             onClick={() => {
               handleSort(SORT.downName);
             }}
@@ -211,7 +196,7 @@ export default function ThongTinSpCon(props) {
           </button>
         </div>
       </div>
-      <div className="w-full flex flex-col justify-center items-center">
+      <div className="w-[70%] flex flex-col justify-center items-center">
         <span className="flex flex-row justify-start items-center flex-wrap w-full">
           {listTTSp?.product ? ShowLoaiSP : ""}
         </span>

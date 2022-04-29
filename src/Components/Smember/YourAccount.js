@@ -40,7 +40,7 @@ export default function YourAccount() {
       <h2 className="font-semibold text-red-600 text-3xl">{user?.user ? user?.user?.name : ""}</h2>
       {user?.user ? 
       <div className="w-full flex flex-col justify-between items-center">
-        <div className="w-full flex flex-row justify-start items-center">
+        <div className="w-full flex flex-row justify-around items-center">
           <div className="w-[300px]">
             <p className="text-sm lg:text-lg md:text-md">Email</p>
             <svg
@@ -83,50 +83,6 @@ export default function YourAccount() {
           </div>
         </div>
         <div className="h-[50px]"></div>
-        {/* <form className="form w-full flex flex-row justify-start items-end mb-[50px]" onSubmit={UpdateAccountPass}>
-          <div className="w-[300px] flex flex-col justify-around items-center">
-            <label
-              htmlFor="inputPassword"
-              className="text-sm lg:text-lg md:text-md"
-            >
-              Password
-            </label>
-            <i className="fa-solid fa-key text-[50px] h-12 w-12 my-[5px] text-red-600"></i>
-            <input
-              type="password"
-              className="form-control w-[80%]"
-              name="passCu"
-              placeholder="Password Old"
-              value={passCu}
-              onChange={onChangePassCu}
-              required
-            />
-          </div>
-          <div className="w-[300px] flex flex-col justify-around items-center">
-            <label
-              htmlFor="inputPasswordMoi"
-              className="text-sm lg:text-lg md:text-md"
-            >
-              Password Moi
-            </label>
-            <i className="fa-brands fa-keycdn  text-[50px] h-12 w-12 my-[5px] text-red-600"></i>
-            <input
-              type="password"
-              className="form-control w-[80%]"
-              name="password"
-              value={password}
-              placeholder="Password new"
-              required
-              onChange={onChangePassMoi}
-              pattern="[0-9a-zA-Z]{6}"
-            />
-          </div>
-          <input
-            type="submit"
-            className="btn btn-primary text-[#f53939]"
-            value="Đổi mật khẩu"
-          />
-        </form> */}
       </div>
       : ""}
      

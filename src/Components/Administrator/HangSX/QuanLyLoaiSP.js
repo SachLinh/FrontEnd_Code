@@ -71,8 +71,7 @@ export default function QuanLyLoaiSP() {
     var getListLoaiSP = findName(currentPosts).map((item, index) => {
       return (
         <tr key={index}>
-          <td className="border border-slate-400 text-center">{item._id}</td>
-          <td className="border border-slate-400">{item.name}</td>
+          <td className="border border-slate-400 text-center">{item.name}</td>
           <td className="border border-slate-400 text-center">
             <Link to={`/Admin/QuanLyHangSX/Update/${item._id}`}>
               <button type="button" className="btn btn-info">
@@ -123,7 +122,6 @@ export default function QuanLyLoaiSP() {
         <table className="table table-hover leading-[40px]">
           <thead>
             <tr className="text-center text-[#f53737]">
-              <th className="border border-slate-400">Mã ID</th>
               <th className="border border-slate-400" onClick={handleSort}>
                 <button className="btn btn-outline-success">
                   Tên Loại SP {getSortAge()}
