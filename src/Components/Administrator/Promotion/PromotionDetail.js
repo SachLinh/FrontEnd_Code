@@ -7,7 +7,6 @@ import { format } from "date-fns";
 
 export default function PromotionDetail() {
   const params = useParams();
-  console.log(params.idSanPham);
   const dispatch = useDispatch()
   const data = useSelector(state => state.listPromotion)
 

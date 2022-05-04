@@ -53,6 +53,9 @@ function ProductDetail() {
       currency: "VND",
     }).format(price);
   };
+  const hetHang = () => {
+    toast.warn("🦄 Sản phẩm này đã hết trong kho!");
+  };
   return (
     <div className="w-full mt-[50px]">
       <div className="flex justify-center items-center text-center">
@@ -121,17 +124,31 @@ function ProductDetail() {
                 </div>
                 <div className="mt-5 ">
                   <div>
-                    <div
-                      className="text-center bg-red-600 rounded-[50px] lg:py-2 text-white cursor-pointer ml-3 mr-3 lg:ml-0 lg:mr-0 md:p-2 sm:p-2 p-2"
-                      onClick={storage}
-                    >
-                      <h1 className="font-bold lg:text-[18px] text-[16px] md:text-[17px]">
-                        Thêm vào giỏ hàng
-                      </h1>
-                      <p className="lg:text-[18px] text-[14px]">
-                        (Giao tận nơi hoặc lấy tại cửa hàng)
-                      </p>
-                    </div>
+                    {detailProduct?.detailSP?.product?.Count == 0 ? (
+                      <div
+                        className="text-center bg-[#2c8de7] rounded-[50px] lg:py-2 text-white cursor-pointer ml-3 mr-3 lg:ml-0 lg:mr-0 md:p-2 sm:p-2 p-2 disabled"
+                        onClick={hetHang}
+                      >
+                        <h1 className="font-bold lg:text-[18px] text-[16px] md:text-[17px]">
+                          Hết hàng
+                        </h1>
+                        <p className="lg:text-[18px] text-[14px]">
+                          (Giao tận nơi hoặc lấy tại cửa hàng)
+                        </p>
+                      </div>
+                    ) : (
+                      <div
+                        className="text-center bg-red-600 rounded-[50px] lg:py-2 text-white cursor-pointer ml-3 mr-3 lg:ml-0 lg:mr-0 md:p-2 sm:p-2 p-2 disabled"
+                        onClick={storage}
+                      >
+                        <h1 className="font-bold lg:text-[18px] text-[16px] md:text-[17px]">
+                          Thêm vào giỏ hàng
+                        </h1>
+                        <p className="lg:text-[18px] text-[14px]">
+                          (Giao tận nơi hoặc lấy tại cửa hàng)
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="mt-3 border-[1px] rounded-xl border-gray-300 ml-3 mr-3 lg:ml-0 lg:mr-0">

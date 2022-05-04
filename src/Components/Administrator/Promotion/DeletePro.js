@@ -4,23 +4,22 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router-dom';
-import { deleteUser, getUser } from '../../../Features/AuthSlice';
+import { deletePromotion, getPromotion } from '../../../Features/PromotionSlice';
 
-export default function DeleteUser() {
+export default function DeletePromotion() {
 	const params = useParams();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(getUser(params.idUser));
+		dispatch(getPromotion(params.idPromotion));
 	}, []);
-	const userDetail = useSelector((state) => state.auth);
+	const proDetail = useSelector((state) => state.listPromotion);
 	const onSubmit = async (e) => {
 		e.preventDefault();
-
 		try {
-			dispatch(deleteUser(params.idUser));
+			dispatch(deletePromotion(params.idPromotion));
 			alert('Xóa thành công');
-			navigate(`/Admin/QuanLyUser`);
+			navigate(`/Admin/QuanLyPromotion`);
 		} catch (error) {
 			console.log(error);
 		}
@@ -29,19 +28,19 @@ export default function DeleteUser() {
 		<div className=''>
 			<div className='bg-[#fcf8f2]'>
 				<h2 className='text-[#f73d3d] text-[40px] w-full text-center bg-gradient-to-r from-[#fde4be] to-[#f5a9dc] p-[15px] rounded-xl'>
-					Delete User
+					Delete Khuyến Mại
 				</h2>
-				<Link to='/Admin/QuanLyUser' className=''>
+				<Link to='/Admin/QuanLyPromotion' className=''>
 					<button className='my-[10px] ml-[10px] p-[10px] border-2 btn btn-outline-danger rounded-xl font-Roboto font-[500] text-[20px]'>
 						<i className='fa-solid fa-arrow-rotate-left'></i>Back
 					</button>
 				</Link>
-				{userDetail?.detailUser?.user ? (
+				{proDetail?.detailPromotion?.promotion ? (
 					<form className='p-[20px] w-full' onSubmit={onSubmit}>
 						<table className='px-[20px] mb-[20px] mt-[20px] w-full'>
 							<tr>
 								<th className='border pl-[10px] border-slate-300'>
-									<label htmlFor=''>Name</label>
+									<label htmlFor=''>Giá trị</label>
 								</th>
 								<td className='w-5/6 h-[50px] pl-[10px] border border-slate-300'>
 									<input
@@ -51,13 +50,13 @@ export default function DeleteUser() {
 										placeholder='name'
 										name='name'
 										required
-										value={userDetail?.detailUser?.user?.name}
+										value={proDetail?.detailPromotion?.promotion?.value}
 									/>
 								</td>
 							</tr>
 							<tr>
 								<th className='border pl-[10px] border-slate-300'>
-									<label htmlFor=''>Email</label>
+									<label htmlFor=''>Từ ngày</label>
 								</th>
 								<td className='w-5/6 h-[50px] pl-[10px] border border-slate-300'>
 									<input
@@ -67,7 +66,8 @@ export default function DeleteUser() {
 										placeholder='email'
 										name='email'
 										required
-										value={userDetail?.detailUser?.user?.email}
+										value={new Date(proDetail?.detailPromotion?.promotion?.DateOfStart).toLocaleDateString('vi-VI')}
+
 									/>
 								</td>
 							</tr>
@@ -83,7 +83,7 @@ export default function DeleteUser() {
 										placeholder='phone'
 										name='phone'
 										required
-										value={userDetail?.detailUser?.user?.phone}
+										value={new Date(proDetail?.detailPromotion?.promotion?.DateOfEnd).toLocaleDateString('vi-VI')}
 									/>
 								</td>
 							</tr>

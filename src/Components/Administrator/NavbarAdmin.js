@@ -75,6 +75,16 @@ export default function NavbarAdmin() {
 							</li>
 							<li className='rounded-lg mb-2'>
 								<NavLink
+									to='/Admin/QuanLyPromotion'
+									className='flex items-center gap-4 text-2xl font-[4500] text-gray-700 px-4 py-3 rounded-lg
+                  active:bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 active:text-[#533fff] shadow-md
+                  '>
+									<i class='fa-solid fa-arrow-trend-down text-[#e4c518] text-2xl'></i>
+									Khuyến Mại
+								</NavLink>
+							</li>
+							<li className='rounded-lg mb-2'>
+								<NavLink
 									to='/Admin/QuanLyHoaDon'
 									className='flex items-center gap-4 text-2xl font-[4500] text-gray-700 px-4 py-3 rounded-lg
                   active:bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 active:text-[#533fff] shadow-md
