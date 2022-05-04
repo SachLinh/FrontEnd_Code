@@ -1,20 +1,17 @@
 /** @format */
 
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import PageProd from '../Pagination/PageProd';
-import { getAllDanhMuc } from '../../../Features/MenuSlice';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getAllUser } from '../../../Features/AuthSlice';
+import PageProd from '../Pagination/PageProd';
 
-export default function QuanLyLoaiSP() {
+export default function QuanLyUser() {
 	const dispatch = useDispatch();
-	const listLoai = useSelector((state) => state.listDanhMuc);
-	const loaiSP = listLoai.listCata.catas;
+	const listUser = useSelector((state) => state.auth);
 	useEffect(() => {
-		dispatch(getAllDanhMuc());
+		dispatch(getAllUser());
 	}, []);
-
 	const [currentPage, setCurrentPage] = useState(1);
 	const [postsPerPage] = useState(5);
 
@@ -54,54 +51,83 @@ export default function QuanLyLoaiSP() {
 			);
 		}
 		if (sortId !== SORT.down) {
-			res.sort((a, b) => (a.name > b.name ? 1 : -1));
-		} else {
 			res.sort((a, b) => (a.name < b.name ? 1 : -1));
+		} else {
+			res.sort((a, b) => (a.name > b.name ? 1 : -1));
 		}
 		return res;
+	};
+	// Loc loai Tai Khoan
+	const [loc, setLoc] = useState('');
+	const locLoaiTaiKhoan = function (list) {
+		let res = [...list];
+		if (loc) {
+			res = res.filter((el) => el.loaiTaiKhoan.includes(loc.loc));
+		}
+		return res;
+	};
+	const funcLoc = (e) => {
+		setLoc({
+			...loc,
+			[e.target.name]: e.target.value,
+		});
 	};
 	// get ccurrent Page
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
-	if (loaiSP) {
-		var currentPosts = loaiSP.slice(indexOfFirstPost, indexOfLastPost);
+	if (listUser?.listUser?.users) {
+		var currentPosts = listUser?.listUser?.users.slice(
+			indexOfFirstPost,
+			indexOfLastPost,
+		);
 	}
 
 	// function paginate
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
-	if (loaiSP) {
-		var getListLoaiSP = findName(currentPosts).map((item, index) => {
-			return (
-				<tr key={index}>
-					<td className='border border-slate-400 text-center'>
-						{item.name}
-					</td>
-					<td className='border border-slate-400 text-center'>
-						<Link to={`/Admin/QuanLyHangSX/Update/${item._id}`}>
-							<button type='button' className='btn btn-info'>
-								Update
-							</button>
-						</Link>
-					</td>
-					<td className='border border-slate-400 text-center'>
-						<Link to={`/Admin/QuanLyHangSX/Delete/${item._id}`}>
-							<button type='button' className='btn btn-warning'>
-								Delete
-							</button>
-						</Link>
-					</td>
-				</tr>
-			);
-		});
+	if (listUser?.listUser?.users) {
+		var getUsers = findName(locLoaiTaiKhoan(currentPosts)).map(
+			(item, index) => {
+				return (
+					<tr key={index}>
+						<td className='border border-slate-400 text-center'>
+							{item.name}
+						</td>
+						<td className='border border-slate-400 text-center'>
+							{item.email}
+						</td>
+						<td className='border border-slate-400 text-center'>
+							{item.phone}
+						</td>
+						<td className='border border-slate-400 text-center'>
+							{item.loaiTaiKhoan}
+						</td>
+						<td className='border border-slate-400 text-center'>
+							<Link to={`/Admin/QuanLyUser/UpdateUser/${item._id}`}>
+								<button type='button' className='btn btn-info'>
+									Update
+								</button>
+							</Link>
+						</td>
+						<td className='border border-slate-400 text-center'>
+							<Link to={`/Admin/QuanLyUser/DeleteUser/${item._id}`}>
+								<button type='button' className='btn btn-warning'>
+									Delete
+								</button>
+							</Link>
+						</td>
+					</tr>
+				);
+			},
+		);
 	}
 	return (
 		<div className='w-full bg-[#fcf8f2]'>
 			<h1 className='text-[#f73d3d] text-[40px] w-full text-center bg-gradient-to-r from-[#fde4be] to-[#f5a9dc] p-[15px] rounded-xl'>
-				QUẢN LÝ DANH MỤC
+				QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG
 			</h1>
-			<Link to={`/Admin/QuanLyHangSX/AddNewLoaiSP`}>
+			<Link to={`/Admin/QuanLyUser/AddUser`}>
 				<button className='btn btn-outline-success mx-[20px] my-4'>
-					Thêm mới DANH MỤC
+					Thêm mới User
 				</button>
 			</Link>
 			{/* // Tim kiem */}
@@ -130,23 +156,38 @@ export default function QuanLyLoaiSP() {
 								className='border border-slate-400'
 								onClick={handleSort}>
 								<button className='btn btn-outline-success'>
-									Tên Loại SP {getSortAge()}
+									Tên User {getSortAge()}
 								</button>
+							</th>
+							<th className='border border-slate-400'>Email</th>
+							<th className='border border-slate-400'>SDT</th>
+							<th className='border border-slate-400'>
+								<select
+									className='w-full h-full'
+									name='loc'
+									value={loc}
+									onChange={funcLoc}>
+									<option value=''>Loai Tai Khoan</option>
+									<option value=''>All</option>
+									<option value='Khach Hang'>Khach Hang</option>
+									<option value='Nhan Vien'>Nhan Vien</option>
+									<option value='Admin'>Admin</option>
+								</select>
 							</th>
 							<th className='border border-slate-400'>Sửa</th>
 							<th className='border border-slate-400'>Xóa</th>
 						</tr>
 					</thead>
 					<tbody className='font-Roboto font-[500px]'>
-						{loaiSP ? getListLoaiSP : ''}
+						{listUser?.listUser?.users ? getUsers : ''}
 					</tbody>
 				</table>
 			</div>
 
-			{loaiSP ? (
+			{listUser?.listUser?.users ? (
 				<PageProd
 					postsPerPage={postsPerPage}
-					totalPosts={loaiSP.length}
+					totalPosts={listUser?.listUser?.users.length}
 					paginate={paginate}
 				/>
 			) : (

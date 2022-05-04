@@ -1,18 +1,17 @@
 /** @format */
 
 import React, { useEffect, useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllUser, loginUser } from '../../Features/AuthSlice';
-import { toast } from 'react-toastify';
+import { getAllUser, loginAdmin } from '../../Features/AuthSlice';
 
-function Smember() {
+export default function LoginAdmin() {
 	const [formData, setformData] = useState({
 		email: '',
 		password: '',
 	});
 	const dispatch = useDispatch();
-	const user = JSON.parse(localStorage.getItem('user'));
+	const admin = JSON.parse(localStorage.getItem('admin'));
 	const { email, password } = formData;
 	const onChange = (e) => {
 		setformData({
@@ -23,14 +22,14 @@ function Smember() {
 	const allUser = useSelector((state) => state.auth);
 	useEffect(() => {
 		dispatch(getAllUser());
-	}, [user]);
+	}, [admin]);
 	const LoginAccount = async (e) => {
 		e.preventDefault();
-		dispatch(loginUser(formData));
+		dispatch(loginAdmin(formData));
 	};
-	if (user?.user?.loaiTaiKhoan === 'Khach Hang') {
-		toast.success('Login thành công');
-		return <Navigate to={'/SmemberMain'} />;
+	if (admin) {
+		alert('Login Admin thành công');
+		return <Navigate to={'/Admin'} />;
 	}
 	return (
 		<div className='w-full mx-auto h-full mt-[50px] md:mb-[100px] mb-[0px] lg:mb-[0px] sm:mb-[0px]'>
@@ -88,26 +87,6 @@ function Smember() {
 													value='Login'
 												/>
 											</form>
-											<div className='text-center pt-1 mb-12 pb-1'>
-												<a className='text-gray-500' href='#!'>
-													Forgot password?
-												</a>
-											</div>
-											<div className='flex items-center justify-between pb-6'>
-												<p className='mb-0 mr-2'>
-													Don't have an account?
-												</p>
-												<Link to='/Register'>
-													<button
-														type='button'
-														className='inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded 
-                          hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out'
-														data-mdb-ripple='true'
-														data-mdb-ripple-color='light'>
-														Create Account
-													</button>
-												</Link>
-											</div>
 										</div>
 									</div>
 									<div
@@ -120,8 +99,8 @@ function Smember() {
 											<p className='w-full flex flex-col justify-between items-center'>
 												<img
 													src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp'
-													class='md:w-[30%] lg:w-full w-full'
-													alt='Sample image'
+													className='md:w-[30%] lg:w-full w-full'
+													alt='Sampleimage'
 												/>
 											</p>
 										</div>
@@ -135,5 +114,3 @@ function Smember() {
 		</div>
 	);
 }
-
-export default Smember;
