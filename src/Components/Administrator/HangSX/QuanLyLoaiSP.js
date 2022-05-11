@@ -1,7 +1,6 @@
 /** @format */
 
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import PageProd from '../Pagination/PageProd';
 import { getAllDanhMuc } from '../../../Features/MenuSlice';

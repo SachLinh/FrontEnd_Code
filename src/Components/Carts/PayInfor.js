@@ -112,7 +112,7 @@ export default function PayInfor() {
                 </div>
             </div>
         </div>
-        <div className="border border-solid rounded-xl p-2 mt-3 shadow-lg">
+        <div className="border border-solid rounded-xl p-2 mt-3 shadow-lg w-full">
             <div className="grid grid-flow-row grid-cols-2 pb-2">
                 <p className="text-md font-bold">Tổng tiền tạm tính:</p>
 
@@ -120,12 +120,12 @@ export default function PayInfor() {
 
             </div>
             {/* <Link to="/payment"> */}
-                <button type='submit' className="text-center bg-red-600 text-white font-bold py-4 rounded-md mb-2 cursor-pointer w-full">
+                <button type='submit' className="text-center bg-red-600 text-white font-bold py-2 md:py-4 rounded-md mb-2 cursor-pointer w-full">
                     <p>Tiếp tục</p>
                 </button>
             {/* </Link> */}
             <Link to="/">
-                <div className="border border-solid border-red-600 py-4 text-center text-red-600 font-bold rounded-md hover:bg-red-500 hover:text-white cursor-pointer transition-all">
+                <div className="border border-solid border-red-600 py-2 md:py-4 text-center text-red-600 font-bold rounded-md hover:bg-red-500 hover:text-white cursor-pointer transition-all">
                     <p>CHỌN THÊM SẢN PHẨM KHÁC</p>
                 </div>
             </Link>

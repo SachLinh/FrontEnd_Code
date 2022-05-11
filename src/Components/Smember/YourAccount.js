@@ -1,47 +1,46 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../../Features/AuthSlice";
+import {toast} from 'react-toastify'
 
 export default function YourAccount() {
   const user = JSON.parse(localStorage.getItem("user"))
   const [formData, setformData] = useState({
-    password: ""
+    currentPassword: "",
+    newPassword:"",
+    confirmNewPassword:""
   });
-  const [oldPass, setOldPass] = useState({passCu:""})
-  const {password} = formData
-  const {passCu} = oldPass
-  const init = {
-    id:user?.user?._id
-  }
+  const {currentPassword, newPassword, confirmNewPassword} = formData
   const dispatch = useDispatch()
   const onChangePassMoi = (e) => {
     setformData({
       ...formData,
       [e.target.name]: e.target.value,
     });
-  };console.log(password);
-  const onChangePassCu = (e) => {
-    setOldPass({
-      ...oldPass,
-      [e.target.name]: e.target.value,
-    });
   };
   const UpdateAccountPass = async (e) => {
     e.preventDefault();
-    if(user?.user)
+    if(newPassword === confirmNewPassword)
     {
-      dispatch(updateUser({init, formData}))
+      try {
+       await axios.post(`http://localhost:5000/users/${user?.user?._id}/ChangePassword`, formData) 
+       toast("Change password success")
+      } catch (error) {
+        toast("Change password fail")
+        console.log(error);
+      }
     }
     
   };
   return (
-    <div className="col-start-2 col-span-3 border-[1px] border-gray-300 rounded-xl text-center md:mt-[0px] mt-[15px]">
-      <p className="text-[25px] mx-auto text-red-600">Xin chào</p>
-      <h2 className="font-semibold text-red-600 text-3xl">{user?.user ? user?.user?.name : ""}</h2>
+    <div className="col-start-2 col-span-3 border-[1px] border-gray-300
+     rounded-xl text-center md:mt-[0px] mt-[15px] h-[300px]">
+      <p className="text-[15px] md:text-[25px] mx-auto text-red-600">Xin chào</p>
+      <h2 className="font-semibold text-red-600 text-sm md:text-3xl">{user?.user ? user?.user?.name : ""}</h2>
       {user?.user ? 
       <div className="w-full flex flex-col justify-between items-center">
         <div className="w-full flex flex-row justify-around items-center">
-          <div className="w-[300px]">
+          <div className="w-[200px]">
             <p className="text-sm lg:text-lg md:text-md">Email</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +60,7 @@ export default function YourAccount() {
               {user.user.email}
             </p>
           </div>
-          <div className="w-[300px]">
+          <div className="w-[200px]">
             <p className="text-sm lg:text-lg md:text-md">Phone</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +81,24 @@ export default function YourAccount() {
             </p>
           </div>
         </div>
-        <div className="h-[50px]"></div>
+        <div className="w-full flex flex-row justify-around items-center mt-[20px] h-[100px]">
+          <form onSubmit={UpdateAccountPass} className="w-full flex flex-col md:flex-row justify-center items-center
+           md:items-center text-[12px] md:text-[17px] font-[400] md:font-[500]">
+            <div className="mt-[40px] md:mt-[0px] mb-[20px]">
+              <label className="w-[150px]">Old Password</label>
+              <input type="password" className="border outline-none rounded-xl" name="currentPassword" value={currentPassword} required  onChange={onChangePassMoi}/>
+            </div>
+            <div className="mb-[20px]">
+              <label className="w-[150px]">New Password</label>
+              <input type="password" className="border outline-none rounded-xl" name="newPassword" value={newPassword} required  onChange={onChangePassMoi} />
+            </div>
+            <div className="mb-[20px]">
+              <label className="w-[150px]">Confirm Password</label>
+              <input type="password" className="border outline-none rounded-xl" name="confirmNewPassword" value={confirmNewPassword} required  onChange={onChangePassMoi} />
+            </div>
+            <input type="submit" className="btn btn-success text-[#fc3939] text-[12px] md:text-[17px]" value="Change Password"/>
+          </form>
+        </div>
       </div>
       : ""}
      

@@ -51,7 +51,8 @@ export default function Header() {
               }}
             >
               Danh mục
-              <div className={`absolute  transition-all duration-1000 w-full flex flex-row justify-center rounded-lg ${openMenu ? "top-[100px] left-[0px]" : "top-[100px] left-[-5000px]"} bg-[#e9e6e0]`}>
+              <div className={`absolute  transition-all duration-1000 w-[30%] md:w-full flex flex-row justify-center rounded-lg ${openMenu ? "top-[50px] sm:top-[100px] left-[90px] md:left-[0px]"
+               : "top-[50px] sm:top-[100px]  left-[-5000px]"} bg-none md:bg-[#e9e6e0]`}>
                 <Menu />
               </div>
             </button>

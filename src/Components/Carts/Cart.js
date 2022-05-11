@@ -55,17 +55,20 @@ export default function Cart() {
     getListCart();
   }, []);
   return (
-    <div className="w-full bg-[#f0f0f0] mt-[100px] flex flex-row justify-center">
-      <div className="w-[1300px] mt-[30px] pb-[100px] flex flex-row justify-start">
-        <div className="w-[60%] mr-[10px]">
-          <h3 className="text-[25px] font-serif font-[400]">Giỏ hàng</h3>
+    <div className="w-full bg-[#f0f0f0] mt-[80px] sm:mt-[100px] flex flex-row justify-center">
+      <div className="2xl:w-[1300px] relative xl:w-[1200px] lg:w-[1000px] md:w-[700px] sm:w-[600px] w-[350px]
+      mt-[30px] pb-[100px] flex flex-col lg:flex-row justify-between items-center lg:justify-start">
+        {/* danh sach san pham */}
+        <div className="w-[90%] lg:w-[60%] mr-[0px] lg:mr-[10px]">
+          <h3 className="text-[20px] md:text-[25px] font-serif font-[400]">Giỏ hàng</h3>
           {(ListCart.length === 0 && <CartEmpty />) || (
-            <div className="mt-[50px]">
-              <table>
+            <div className="mt-[10px] md:mt-[50px] w-full">
+              <table className="w-full">
                 <tr>
-                  <th  className="text-center">Sản phẩm</th>
-                  <th>Giá</th>
-                  <th>Số lượng</th>
+                  <th  className="text-center text-[13px] sm:text-[17px]">Sản phẩm</th>
+                  <th className="text-[13px] sm:text-[17px] md:text-[20px]">Số lượng</th>
+                  <th className="hidden md:block text-[15px] md:text-[20px] text-center  w-[100px] lg:w-[200px]">Giá</th>
+             
                 </tr>
                   {ListCart.map((value, key) => {
                 return (
@@ -82,8 +85,8 @@ export default function Cart() {
             </div>
           )}
         </div>
-
-        <div className="w-[35%] rounded-xl p-2">
+        {/* Bill */}
+        <div className="w-[90%] lg:w-[35%] rounded-xl p-2 text-[15px] lg:text-[17px]">
           <div className="flex flex-col justify-start ">
             <p className="text-md font-bold uppercase pb-3">Cộng giỏ hàng</p>
             <hr></hr>
@@ -107,7 +110,7 @@ export default function Cart() {
             
           </div>
           <Link to={user?.toKen ? `/payment-infor` : `/Smember`}>
-            <div className="text-center bg-[#d26e4b] text-white font-bold py-4 rounded-md mb-2 cursor-pointer">
+            <div className="text-center bg-[#d26e4b] text-white font-bold py-2 sm:py-4 rounded-md mb-2 cursor-pointer">
               <p>
                 {user?.toKen
                   ? `TIẾN HÀNH THANH TOÁN`
@@ -117,7 +120,7 @@ export default function Cart() {
           </Link>
           <Link to="/">
             <div
-              className="border border-solid border-red-600 py-4 text-center text-red-600  
+              className="border border-solid border-red-600 py-2 sm:py-4 text-center text-red-600  
               font-bold rounded-md hover:bg-[#d26e4b] hover:text-white cursor-pointer transition-all"
             >
               <p>CHỌN THÊM SẢN PHẨM KHÁC</p>

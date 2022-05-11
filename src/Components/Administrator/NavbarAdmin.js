@@ -10,7 +10,6 @@ export default function NavbarAdmin() {
 
 	return (
 		<>
-			{/* <AdminNavbar showSidebar={showSidebar} setShowSidebar={setShowSidebar} /> */}
 			<div
 				className={`h-screen fixed top-0 md:left-0 ${showSidebar} overflow-y-auto flex-row ml-[10px] mt-[10px] rounded-xl
         flex-nowrap overflow-hidden shadow-xl bg-white w-64 z-10 transition-all duration-300`}>

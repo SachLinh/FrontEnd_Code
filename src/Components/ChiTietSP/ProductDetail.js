@@ -10,15 +10,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { detailSP } from "../../Features/SanPhamSlice";
 import { getAllThongSo } from "../../Features/ThongSoSlice";
+import { getAllPromotion } from "../../Features/PromotionSlice";
 
 function ProductDetail() {
   const params = useParams();
   const dispatch = useDispatch();
   const detailProduct = useSelector((state) => state.listSanPham);
   const thongso = useSelector((state) => state.listThongSo);
+  const khuyenMai = useSelector((state) => state.listPromotion);
   useEffect(() => {
     dispatch(detailSP(params.idSP));
     dispatch(getAllThongSo());
+    dispatch(getAllPromotion());
+
   }, [params.idSP]);
   const keyLocal = "data";
   if (localStorage.getItem(keyLocal) === null) {
@@ -57,45 +61,51 @@ function ProductDetail() {
     toast.warn("🦄 Sản phẩm này đã hết trong kho!");
   };
   return (
-    <div className="w-full mt-[50px]">
+    <div className="w-full mt-[100px] md:mt-[130px]">
       <div className="flex justify-center items-center text-center">
-        <div
-          className="font-sans 2xl:w-[1300px] relative xl:w-[1200px] 
-				lg:w-[1000px] md:w-[700px] sm:w-[600px] w-[350px]"
+        <div className="font-sans 2xl:w-[1300px] relative xl:w-[1200px] lg:w-[1000px] md:w-[700px] sm:w-[600px] w-[350px]"
         >
-          <div
-            className="py-[10px] border-solid ml-2 mt-[65px] 
-					flex lg:flex-row flex-col justify-start lg:justify-between lg:items-center items-start w-full"
-          ></div>
-          <div className="border-y-[1px] border-gray-200 pb-[30px] shadow-xl bg-[#ffffff] rounded-xl">
-            <div className="flex flex-row justify-around text-center items-start">
-              <div className="shadow-sm border-[1px] mt-[10px] ml-[10px] p-[10px] rounded-xl w-[30%]">
-                <h3 className="font-bold text-[20px]  mb-[20px] lg:text-[18px] md:text-[17px] ">
+          <div className="border-y-[1px] border-gray-200 pb-[30px] shadow-xl bg-[#ffffff]
+           rounded-xl w-full h-full flex flex-row justify-center items-center">
+            <div className="flex flex-row justify-center sm:justify-around flex-wrap text-center items-start w-full">
+              {/* anh + ten */}
+              <div className="shadow-sm border-[1px] mt-[10px] ml-[0px] lg:ml-[10px] p-[0px] sm:p-[10px] rounded-xl
+               w-[95%] sm:w-[47%] lg:w-[30%] flex flex-col justify-center items-center ">
+                <h3 className="font-bold text-[15px]  mb-[5px] sm:mb-[20px] lg:text-[18px] md:text-[17px] mt-[10px] sm:mt-[0px]">
                   {detailProduct?.detailSP?.product?.Name}
                 </h3>
-                <div className="flex justify-center ">
-                  <img src={detailProduct?.detailSP?.product?.Image} />
+                <div className="flex justify-center w-full lg:h-full overflow-hidden ">
+                  <img src={detailProduct?.detailSP?.product?.Image} className=" w-[70%] sm:w-[100%] 
+                  h-[280px] sm:h-[360px] lg:h-[360px] 
+                  hover:scale-110   transition-all duration-500" />
                 </div>
-                <div className="flex justify-center m-[5px] lg:ml-[10px]">
+                <div className="flex flex-row justify-center items-center m-[5px] lg:ml-[10px]">
                   <img
-                    className="mt-5 rounded-[40px] w-[100%] "
+                    className="mt-0 lg:mt-5 rounded-[40px] w-[70%] md:w-[100%] sm:mb-[0px] mb-[5px]"
                     src="https://cdn.cellphones.com.vn/media/wysiwyg/Banner/400-100-product.png"
                     alt=""
                   />
                 </div>
               </div>
-              <div className="shadow-sm border-[1px] mt-[10px] p-[20px] rounded-xl  w-[30%]">
+              {/* button */}
+              <div className="shadow-sm border-[1px] mt-[10px] p-[20px] rounded-xl w-[95%] sm:w-[47%] lg:w-[30%]">
                 <div className="lg:w-[90px] lg:h-6 lg:text-[14px] lg:ml-0 w-[80px] h-[25px] ml-5 text-center text-[14px] text-red-600 bg-red-100 border-[1px] border-red-500 rounded-lg ">
                   <p className="">Trả góp 0%</p>
                 </div>
-                <div className="flex my-4 text-center text-[14px] lg:ml-0 ml-5">
+                <div className="flex my-2 lg:my-4 text-center text-[14px] lg:ml-0 ml-5">
                   <p className="lg:text-[18px] font-bold text-red-500">
                     {formatPrice(detailProduct?.detailSP?.product?.Price)}
                   </p>
                   <p className="lg:text-[17px] text-gray-400 ml-4 mt-[2px] line-through">
-                    {formatPrice(
-                      detailProduct?.detailSP?.product?.Price + 2000000
-                    )}
+                  {khuyenMai?.listPromotion?.pros
+                    ? khuyenMai?.listPromotion?.pros.map((pros) => {
+                        if (pros._id === detailProduct?.detailSP?.product?.ID_Promotion) {
+                          return formatPrice(
+                            detailProduct?.detailSP?.product?.Price + (detailProduct?.detailSP?.product?.Price * pros.value) / 100
+                          );
+                        }
+                      })
+                    : ""}
                   </p>
                 </div>
                 <div className="text-left">
@@ -106,7 +116,7 @@ function ProductDetail() {
                     </span>
                   </p>
                 </div>
-                <div className="mt-7 border-[1px] rounded-xl ml-3 mr-3 lg:ml-0 lg:mr-0">
+                <div className="mt-2 lg:mt-7 border-[1px] rounded-xl ml-3 mr-3 lg:ml-0 lg:mr-0">
                   <div className="flex  text-red-600 bg-red-200 py-[5px] px-3 rounded-t-xl">
                     <div className="mt-1 lg:text-[18px] text-[14px]">
                       <ImGift />
@@ -115,14 +125,14 @@ function ProductDetail() {
                       Khuyến mại
                     </p>
                   </div>
-                  <div className="hover:text-red-500 lg:text-[16px] text-[14px] px-3 py-2">
+                  <div className="hover:text-red-500 lg:text-[16px] text-[13px] px-3 py-2">
                     <a href="/">
                       {detailProduct?.detailSP?.product?.Endow}
                       <span className="text-red-500"> (xem chi tiết)</span>
                     </a>
                   </div>
                 </div>
-                <div className="mt-5 ">
+                <div className="mt-2 lg:mt-5 ">
                   <div>
                     {detailProduct?.detailSP?.product?.Count == 0 ? (
                       <div
@@ -141,7 +151,7 @@ function ProductDetail() {
                         className="text-center bg-red-600 rounded-[50px] lg:py-2 text-white cursor-pointer ml-3 mr-3 lg:ml-0 lg:mr-0 md:p-2 sm:p-2 p-2 disabled"
                         onClick={storage}
                       >
-                        <h1 className="font-bold lg:text-[18px] text-[16px] md:text-[17px]">
+                        <h1 className="font-bold lg:text-[18px] text-[14px] md:text-[17px]">
                           Thêm vào giỏ hàng
                         </h1>
                         <p className="lg:text-[18px] text-[14px]">
@@ -158,20 +168,20 @@ function ProductDetail() {
                   <div className="my-3 mx-2">
                     <div className="flex">
                       <BsCheckCircle className="text-green-600 mt-1 lg:text-[17px] text-[20px] " />
-                      <p className="lg:text-[14px] text-[14px] ml-2">
+                      <p className="lg:text-[14px] text-[13px] ml-2">
                         Giảm thêm tới 1% cho thành viên Smember (áp dụng tùy sản
                         phẩm)
                       </p>
                     </div>
                     <div className="flex">
                       <BsCheckCircle className="text-green-600 mt-1 lg:text-[17px] text-[20px]" />
-                      <p className="lg:text-[14px] text-[14px] ml-2">
+                      <p className="lg:text-[14px] text-[13px] ml-2">
                         Mở thẻ tín dụng Shinhanbank, nhận voucher đến 2.000.000đ
                       </p>
                     </div>
                     <div className="flex">
                       <BsCheckCircle className="text-green-600 mt-1 lg:text-[17px] text-[20px]" />
-                      <p className="lg:text-[14px] text-[14px] ml-2">
+                      <p className="lg:text-[14px] text-[13px] ml-2">
                         Giảm thêm 5% (tối đa 500k) khi thanh toán qua ví Moca
                         trên ứng dụng Grab
                       </p>
@@ -179,13 +189,15 @@ function ProductDetail() {
                   </div>
                 </div>
               </div>
+              {/* thong so */}
               {thongso?.listThongSo?.spec
                 ? thongso?.listThongSo?.spec.map((item) => {
                     if (
                       item._id === detailProduct?.detailSP?.product?.ID_Spec
                     ) {
                       return (
-                        <div className="rounded-xl border-[1px] mt-[10px] mr-[10px] h-fit shadow-sm  w-[30%]">
+                        <div className="rounded-xl border-[1px] mt-[10px]
+                        h-fit shadow-sm w-[95%]  lg:w-[30%]">
                           <p className="font-bold py-1 px-1 text-gray-600 lg:text-[18px] text-[14px]">
                             Thông số kỹ thuật
                           </p>

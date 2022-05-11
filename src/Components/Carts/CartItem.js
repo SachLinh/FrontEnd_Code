@@ -51,8 +51,8 @@ export default function CartItem({ value, index, deleteProductInCart }) {
   };
 
   return (
-      <tr>
-        <td className="flex flex-row justify-start items-center w-[400px]">
+      <tr className="">
+        <td className="flex flex-row justify-start items-center w-[230px] sm:w-[400px]">
           <div
             onClick={() => {
               deleteProductInCart(index);
@@ -74,16 +74,17 @@ export default function CartItem({ value, index, deleteProductInCart }) {
               />
             </svg>
           </div>{" "}
-          <img src={value.Image} alt="product in cart" className="w-[100px] mx-[10px]" />
-          <p className="text-[18px] text-[#389250]">{value.Name}</p>
+          <img src={value.Image} alt="product in cart" className="w-[70px] sm:w-[100px] mx-[10px]" />
+          <div className="text-[13px] sm:text-[18px] text-[#389250]">{value.Name}
+            <p className=" sm:hidden text-[#0f0404]">{formatPrice(value.Price)}</p>
+          </div>
         </td>
-        <td className="w-[200px]"> {formatPrice(value.Price)}</td>
-        <td className="w-[200px] inline-flex">
+        <td className="w-[70px] sm:w-[100px]">
           <div className="inline-flex border-[1px] border-[#777] rounded-md ml-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               onClick={decreaseProductCount}
-              className="h-5 w-5 my-auto cursor-pointer"
+              className="h-5 w-3 sm:w-5 my-auto cursor-pointer"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -92,7 +93,7 @@ export default function CartItem({ value, index, deleteProductInCart }) {
               <path strokeLinecap="round" strokeLinejoin="round" d="M18 12H6" />
             </svg>
             <input
-              className="w-8 text-center"
+              className="w-4 sm:w-8 text-center"
               value={value.Count}
               type="text"
               readOnly={true}
@@ -100,7 +101,7 @@ export default function CartItem({ value, index, deleteProductInCart }) {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               onClick={increaseProductCount}
-              className="h-5 w-5 my-auto cursor-pointer"
+              className="h-5 w-3 sm:w-5 my-auto cursor-pointer"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -114,6 +115,7 @@ export default function CartItem({ value, index, deleteProductInCart }) {
             </svg>
           </div>
         </td>
+        <td className="hidden md:block text-[15px] md:text-[20px] text-center w-[100px] lg:w-[200px]"> {formatPrice(value.Price)}</td>
       </tr>
   );
 }

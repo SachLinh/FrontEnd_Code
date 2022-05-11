@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllPromotion } from "../../Features/PromotionSlice";
 import { getAllSanPham } from "../../Features/SanPhamSlice";
+import PageProd from "../Administrator/Pagination/PageProd";
 
 export default function ThongTinSp(props) {
   const dispath = useDispatch();
@@ -20,8 +21,18 @@ export default function ThongTinSp(props) {
       currency: "VND",
     }).format(price);
   };
+  // Phan trang
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   if (listTTSp?.listSanPham?.product) {
-    var ShowLoaiSP = listTTSp?.listSanPham?.product.map((itemSP, indexSP) => {
+    var currentPosts = listTTSp?.listSanPham?.product.slice(
+      indexOfFirstPost,
+      indexOfLastPost
+    );
+    var ShowLoaiSP = currentPosts.map((itemSP, indexSP) => {
       if (itemSP.ID_Cata === props.id) {
         return (
           <div
@@ -89,16 +100,20 @@ export default function ThongTinSp(props) {
               </div>
               {/* price */}
               <div className="flex">
-                <p className="text-[10px] lg:text-[13px] mt-1 mr-2 line-through
-                 text-gray-500 flex flex-row justify-center">
-                {khuyenMai?.listPromotion?.pros
+                <p
+                  className="text-[10px] lg:text-[13px] mt-1 mr-2 line-through
+                 text-gray-500 flex flex-row justify-center"
+                >
+                  {khuyenMai?.listPromotion?.pros
                     ? khuyenMai?.listPromotion?.pros.map((pros) => {
                         if (pros._id === itemSP.ID_Promotion) {
-                          return formatPrice(itemSP.Price + itemSP.Price*pros.value/100);
+                          return formatPrice(
+                            itemSP.Price + (itemSP.Price * pros.value) / 100
+                          );
                         }
                       })
                     : ""}
-                  
+
                   <span></span>
                 </p>
                 <p className="text-[#030303] font-bold text-[13px] lg:text-[15px]">

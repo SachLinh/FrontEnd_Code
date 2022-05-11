@@ -16,7 +16,8 @@ export default function LichSuMuaHang() {
     }).format(price);
   };
   return (
-    <div className="col-start-2 col-span-3 border-[1px] border-gray-300 rounded-xl text-center md:mt-[0px] mt-[130px]">
+    <div className="col-start-2 col-span-3 border-[1px] border-gray-300 rounded-xl text-center 
+    md:mt-[0px] mt-[10px]">
       <p className="text-[25px] mx-auto text-red-600">Đơn hàng đã mua</p>
       <table className="text-center my-[10px] table table-hover">
         <thead>
@@ -32,7 +33,7 @@ export default function LichSuMuaHang() {
           ? allHoaDon?.listHoaDon?.invoices.map((value, key) => {
               if (value.ID_User === user?.user?._id) {
                 return (
-                  <tbody>
+                  <tbody className="text-[14px] md:text-[17px]">
                     <tr
                       key={key + "" + value._id}
                       className=" border border-slate-300 h-[50px]"

@@ -104,8 +104,9 @@ function Payment() {
           </div>
         </div>
       </div>
+      {/* thong tin user */}
       <div className="">
-        <div className="mx-1 py-3 text-lg flex flex-col justify-between h-[300px]">
+        <div className="my-0 md:mx-1 py-0 md:py-3 text-lg flex flex-col justify-between h-[300px] text-[15px] sm:text-[18px]">
           <h2 className="text-center font-bold">THÔNG TIN ĐẶT HÀNG</h2>
           <p>
             Người Nhận: <b>{user?.user?.name}</b>
@@ -124,25 +125,30 @@ function Payment() {
           </p>
         </div>
       </div>
+      {/* danh sach san pham */}
       <table className="text-center mb-[10px]">
         <tr>
           <th className="text-center">Sản phẩm</th>
-          <th>Giá</th>
           <th>Số lượng</th>
+          <th className="hidden md:block text-[15px] md:text-[20px] text-center  w-[100px] lg:w-[200px]">Giá</th>
         </tr>
         {listProduct.map((value, key) => {
           return (
             <tr key={key + "" + value.Name}>
-              <td className="flex flex-row justify-start items-center w-[400px]">
+              <td className="flex flex-row justify-start items-center w-[300px]">
                 <img
                   src={value.Image}
                   alt="product in cart"
                   className="w-[100px] mx-[10px]"
                 />
-                <p className="text-[18px] text-[#389250]">{value.Name}</p>
+                <p className="text-[13px] sm:text-[18px] text-[#389250]">{value.Name}
+                <p className=" sm:hidden text-[#0f0404]">{formatPrice(value.Price)}</p>
+                </p>
               </td>
-              <td className="w-[200px]"> {formatPrice(value.Price)}</td>
-              <td className="w-[200px]"> {value.Count}</td>
+              <td className="w-[70px] sm:w-[100px]"> {value.Count}</td>
+              <td className="hidden md:block text-[15px] md:text-[18px] w-[100px] lg:w-[200px]">
+                 {formatPrice(value.Price)}
+                 </td>
             </tr>
           );
         })}
@@ -157,7 +163,7 @@ function Payment() {
         <Link to="/completePayment">
           <div
             onClick={postBill}
-            className="text-center bg-red-600 text-white font-bold py-4 rounded-md mb-2 cursor-pointer"
+            className="text-center bg-red-600 text-white font-bold py-2 md:py-4 rounded-md mb-2 cursor-pointer"
           >
             <p>TIẾP TỤC</p>
           </div>
