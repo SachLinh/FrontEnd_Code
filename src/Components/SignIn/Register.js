@@ -120,7 +120,6 @@ export default function Register() {
 														value={password}
 														onChange={onChange}
 														required
-														pattern='[0-9a-zA-z]{6}'
 													/>
 												</div>
 												<input

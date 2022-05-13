@@ -153,7 +153,7 @@ export default function ListSanPham() {
 			</h1>
 			<Link to={`/Admin/QuanLySanPham/AddProd`}>
 				<button className='btn btn-outline-success mx-[20px] my-4'>
-					Thêm Sản Phẩm mới
+					Thêm mới
 				</button>
 			</Link>
 			{/* Tim kiem */}

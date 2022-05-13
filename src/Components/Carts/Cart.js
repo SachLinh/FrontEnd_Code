@@ -23,6 +23,7 @@ export default function Cart() {
           Endow: value.Endow,
           Color: value.Color,
           Count: 1,
+          CountWareHouse: value.Count,
           ID_Cata: value.ID_Cata,
           ID_Promotion: value.ID_Promotion,
           ID_Spec: value.ID_Spec,
@@ -56,32 +57,42 @@ export default function Cart() {
   }, []);
   return (
     <div className="w-full bg-[#f0f0f0] mt-[80px] sm:mt-[100px] flex flex-row justify-center">
-      <div className="2xl:w-[1300px] relative xl:w-[1200px] lg:w-[1000px] md:w-[700px] sm:w-[600px] w-[350px]
-      mt-[30px] pb-[100px] flex flex-col lg:flex-row justify-between items-center lg:justify-start">
+      <div
+        className="2xl:w-[1300px] relative xl:w-[1200px] lg:w-[1000px] md:w-[700px] sm:w-[600px] w-[350px]
+      mt-[30px] pb-[100px] flex flex-col lg:flex-row justify-between items-center lg:justify-start"
+      >
         {/* danh sach san pham */}
         <div className="w-[90%] lg:w-[60%] mr-[0px] lg:mr-[10px]">
-          <h3 className="text-[20px] md:text-[25px] font-serif font-[400]">Giỏ hàng</h3>
+          <h3 className="text-[20px] md:text-[25px] font-serif font-[400]">
+            Giỏ hàng
+          </h3>
           {(ListCart.length === 0 && <CartEmpty />) || (
             <div className="mt-[10px] md:mt-[50px] w-full">
               <table className="w-full">
                 <tr>
-                  <th  className="text-center text-[13px] sm:text-[17px]">Sản phẩm</th>
-                  <th className="text-[13px] sm:text-[17px] md:text-[20px]">Số lượng</th>
-                  <th className="hidden md:block text-[15px] md:text-[20px] text-center  w-[100px] lg:w-[200px]">Giá</th>
-             
+                  <th className="text-center text-[13px] sm:text-[17px]">
+                    Sản phẩm
+                  </th>
+                  <th className="text-[13px] sm:text-[17px] md:text-[20px]">
+                    Số lượng
+                  </th>
+                  <th className="hidden md:block text-[15px] md:text-[20px] text-center  w-[100px] lg:w-[200px]">
+                    Giá
+                  </th>
                 </tr>
-                  {ListCart.map((value, key) => {
-                return (
-                                      <CartItem
-                    value={value}
-                    index={key}
-                    key={key}
-                    deleteProductInCart={(index) => deleteProductInCart(index)}
-                  />
-                );
-              })}
+                {ListCart.map((value, key) => {
+                  return (
+                    <CartItem
+                      value={value}
+                      index={key}
+                      key={key}
+                      deleteProductInCart={(index) =>
+                        deleteProductInCart(index)
+                      }
+                    />
+                  );
+                })}
               </table>
-              
             </div>
           )}
         </div>
@@ -91,23 +102,18 @@ export default function Cart() {
             <p className="text-md font-bold uppercase pb-3">Cộng giỏ hàng</p>
             <hr></hr>
             <div className="flex flex-row justify-between py-3">
-              <p className="text-md text-left">
-              Tạm tính
-            </p>
+              <p className="text-md text-left">Tạm tính</p>
               <p className="text-md font-semibold text-right">
-              {formatPrice(total)}
-            </p>
+                {formatPrice(total)}
+              </p>
             </div>
             <hr></hr>
             <div className="flex flex-row justify-between py-3">
-              <p className="text-md text-left">
-              Tổng
-            </p>
+              <p className="text-md text-left">Tổng</p>
               <p className="text-md font-semibold text-right">
-              {formatPrice(total)}
-            </p>
+                {formatPrice(total)}
+              </p>
             </div>
-            
           </div>
           <Link to={user?.toKen ? `/payment-infor` : `/Smember`}>
             <div className="text-center bg-[#d26e4b] text-white font-bold py-2 sm:py-4 rounded-md mb-2 cursor-pointer">

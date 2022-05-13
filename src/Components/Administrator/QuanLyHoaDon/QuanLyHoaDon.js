@@ -114,7 +114,7 @@ export default function QuanLyHoaDon() {
 			<h1
 				className='text-[#f73d3d] text-[40px] w-full text-center
        bg-gradient-to-r from-[#fde4be] to-[#f5a9dc] p-[15px] rounded-xl'>
-				QUẢN LÝ HÓA ĐƠN
+				QUẢN LÝ ĐƠN HÀNG
 			</h1>
 			<div className='p-[20px]'>
 				<table className='table table-hover leading-[40px] border'>

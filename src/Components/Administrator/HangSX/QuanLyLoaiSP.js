@@ -53,9 +53,9 @@ export default function QuanLyLoaiSP() {
 			);
 		}
 		if (sortId !== SORT.down) {
-			res.sort((a, b) => (a.name > b.name ? 1 : -1));
-		} else {
 			res.sort((a, b) => (a.name < b.name ? 1 : -1));
+		} else {
+			res.sort((a, b) => (a.name > b.name ? 1 : -1));
 		}
 		return res;
 	};
@@ -100,7 +100,7 @@ export default function QuanLyLoaiSP() {
 			</h1>
 			<Link to={`/Admin/QuanLyHangSX/AddNewLoaiSP`}>
 				<button className='btn btn-outline-success mx-[20px] my-4'>
-					Thêm mới DANH MỤC
+					Thêm mới
 				</button>
 			</Link>
 			{/* // Tim kiem */}

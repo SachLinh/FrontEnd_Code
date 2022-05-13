@@ -16,9 +16,7 @@ export default function Body() {
     var ShowSanPham = listDanhMucSp.listCata.catas.map((item, index) => {
       if (
         item.name === "Apple" ||
-        item.name === "Samsung" ||
-        item.name === "Oppo" ||
-        item.name === "XiaoMi"
+        item.name === "Samsung"
       ) {
         return (
           <div key={index} className="w-full">

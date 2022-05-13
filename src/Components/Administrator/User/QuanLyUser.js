@@ -24,10 +24,10 @@ export default function QuanLyUser() {
 	// Hiển thị giá trị trên màn hình
 	const getSortAge = () => {
 		if (sortId === SORT.down) {
-			return 'a-z';
+			return '';
 		}
 		if (sortId === SORT.up) {
-			return 'z-a';
+			return '';
 		}
 	};
 	// Chuyển đổi giá trị sắp xếp
@@ -51,9 +51,9 @@ export default function QuanLyUser() {
 			);
 		}
 		if (sortId !== SORT.down) {
-			res.sort((a, b) => (a.name < b.name ? 1 : -1));
-		} else {
 			res.sort((a, b) => (a.name > b.name ? 1 : -1));
+		} else {
+			res.sort((a, b) => (a.name < b.name ? 1 : -1));
 		}
 		return res;
 	};
@@ -127,7 +127,7 @@ export default function QuanLyUser() {
 			</h1>
 			<Link to={`/Admin/QuanLyUser/AddUser`}>
 				<button className='btn btn-outline-success mx-[20px] my-4'>
-					Thêm mới User
+					Thêm mới
 				</button>
 			</Link>
 			{/* // Tim kiem */}

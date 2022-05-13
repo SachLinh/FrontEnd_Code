@@ -110,7 +110,7 @@ export default function QuanLyPromotion() {
 			</h1>
 			<Link to={`/Admin/QuanLyPromotion/AddNewPros`}>
 				<button className='btn btn-outline-success mx-[20px] my-4'>
-					Thêm mới Promotion
+					Thêm mới
 				</button>
 			</Link>
 			<div className='p-[20px]'>

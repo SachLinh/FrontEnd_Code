@@ -10,23 +10,29 @@ import {
 import { useDispatch } from "react-redux";
 import { AddNewHoaDon } from "../../Features/HoaDonSlice";
 import { toast } from "react-toastify";
+import { UpdateSP } from "../../Features/SanPhamSlice";
 
 function Payment() {
   const user = JSON.parse(localStorage.getItem("user"));
   const totalPrice = useRecoilValue(totalPriceState);
   const billInfo = useRecoilValue(billInfoState);
   const listProduct = useRecoilValue(cartProductState);
-  console.log("listProduct", listProduct);
   const setCartProductList = useSetRecoilState(cartProductState);
   const dispatch = useDispatch();
   useEffect(() => {}, []);
-
   const postBill = () => {
-    dispatch(AddNewHoaDon(billInfo));
+    dispatch(AddNewHoaDon(billInfo)); 
+    for(let i =0; i < listProduct.length; i++)
+    {
+      const init = {id: listProduct[i]._id}
+      const dataUpdate = {Count: listProduct[i].CountWareHouse - listProduct[i].Count}
+      dispatch(UpdateSP({init, dataUpdate}))
+    }
     localStorage.removeItem("data");
     setCartProductList([]);
     toast("Đặt hàng thành công");
   };
+  console.log(listProduct);
   const formatPrice = (price) => {
     return new Intl.NumberFormat("vi-VN", {
       style: "currency",
