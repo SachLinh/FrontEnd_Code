@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Menu from "../HomeTrangChu/Menu";
 import {totalPriceState } from '../../Recoil/Recoil';
 import { useRecoilState } from "recoil";
+import {toast} from 'react-toastify'
 export default function Header() {
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
   let [open, setOpen] = useState(false);
@@ -11,8 +12,14 @@ export default function Header() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const find = (search) => {
-    navigate(`/DanhMucSPByName/${search}`);
+    if(search.length > 0)
+    {
+          navigate(`/DanhMucSPByName/${search}`);
     setSearch("");
+    }
+    else{
+      toast.warning("Vui lòng nhập thông tin")
+    }
   };
   const formatPrice = (price) => {
 		return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
@@ -40,6 +47,7 @@ export default function Header() {
                 />
               </Link>
             </h2>
+            {/* danh muc */}
             <button
               className="sm:text-center lg:text-left
               lg:mt-[0px]  lg:mb-[0px] 
@@ -75,11 +83,13 @@ export default function Header() {
               aria-label="Username"
               aria-describedby="basic-addon1"
               value={search}
+              required
               onChange={(e) => {
                 setSearch(e.target.value);
               }}
             />
           </div>
+          {/* button */}
           <div
             onClick={() => {
               setOpen(!open);

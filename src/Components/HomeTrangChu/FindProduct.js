@@ -69,12 +69,12 @@ export default function FindProduct(props) {
   };
   // Phan trang
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(4);
+  const [postsPerPage] = useState(3);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  var currentPosts = listTTSp.slice(indexOfFirstPost, indexOfLastPost);
-  var ShowLoaiSP = funcSort(currentPosts).map((itemSP, indexSP) => {
+  var currentPosts = funcSort(listTTSp).slice(indexOfFirstPost, indexOfLastPost);
+  var ShowLoaiSP = currentPosts.map((itemSP, indexSP) => {
     return (
       <div
         key={indexSP}
@@ -236,7 +236,7 @@ export default function FindProduct(props) {
       </div>
       <div className="w-full md:w-[70%] mt-[20px] sm:mt-[0px] flex flex-col justify-center items-center">
         <span className="flex flex-row justify-start items-center flex-wrap w-full">
-          {listTTSp ? ShowLoaiSP : ""}
+          {listTTSp.length > 1 ? ShowLoaiSP : <div className="pt-[100px]"><h2>Không có sản phẩm phù hợp với nội dung tìm kiếm</h2></div>}
         </span>
         {listTTSp ? (
           <PageProd

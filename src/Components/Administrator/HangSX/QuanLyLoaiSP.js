@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function QuanLyLoaiSP() {
 	const dispatch = useDispatch();
 	const listLoai = useSelector((state) => state.listDanhMuc);
-	const loaiSP = listLoai.listCata.catas;
+	const loaiSP = listLoai?.listCata?.catas;
 	useEffect(() => {
 		dispatch(getAllDanhMuc());
 	}, []);
@@ -59,11 +59,20 @@ export default function QuanLyLoaiSP() {
 		}
 		return res;
 	};
+	const FunctionSort = function (list) {
+		let res = [...list];
+		if (sortId !== SORT.down) {
+			res.sort((a, b) => (a.name < b.name ? 1 : -1));
+		} else {
+			res.sort((a, b) => (a.name > b.name ? 1 : -1));
+		}
+		return res;
+	};
 	// get ccurrent Page
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
 	if (loaiSP) {
-		var currentPosts = loaiSP.slice(indexOfFirstPost, indexOfLastPost);
+		var currentPosts = FunctionSort(loaiSP).slice(indexOfFirstPost, indexOfLastPost);
 	}
 
 	// function paginate

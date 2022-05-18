@@ -26,7 +26,7 @@ export default function CuaHang() {
 								className='w-full rounded-t-lg'
 								alt=''></img>
 							<div
-								className='text-center bg-red-500 w-full h-[10px] leading-[10px] text-white text-[10px]
+								className='text-center bg-[#c7c7c7] w-full h-[10px] leading-[10px] text-white text-[10px]
           2xl:h-[60px] 2xl:leading-[60px] 2xl:text-[20px]
           xl:h-[50px] xl:leading-[50px] xl:text-[18px]
           lg:h-[40px] lg:leading-[40px] lg:text-[16px]
@@ -42,11 +42,11 @@ export default function CuaHang() {
 							</div>
 						</div>
 						<div className='boss m-[5px]'>
-							<h3 className='text-red-500 text-center font-bold '>
-								TIỆN ÍCH TẠI CỬA HÀNG SALI Store
+							<h3 className='text-[#0a0a0a] text-center font-bold '>
+								TIỆN ÍCH TẠI CỬA HÀNG SALISTORE
 							</h3>
 							<p>
-								<strong>UltrphoneS</strong> luôn nỗ lực{' '}
+								<strong>SALISTORE</strong> luôn nỗ lực{' '}
 								<strong>“Tận tâm với khách hàng“</strong> mang đến dịch
 								vụ và trải nghiệm tốt nhất:
 							</p>

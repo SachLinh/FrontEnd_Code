@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import axios from "axios";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   billInfoState,
   cartProductState,
@@ -15,6 +14,7 @@ import { UpdateSP } from "../../Features/SanPhamSlice";
 function Payment() {
   const user = JSON.parse(localStorage.getItem("user"));
   const totalPrice = useRecoilValue(totalPriceState);
+  const [totalPrices, setTotalPrice] = useRecoilState(totalPriceState);
   const billInfo = useRecoilValue(billInfoState);
   const listProduct = useRecoilValue(cartProductState);
   const setCartProductList = useSetRecoilState(cartProductState);
@@ -31,6 +31,7 @@ function Payment() {
     localStorage.removeItem("data");
     setCartProductList([]);
     toast("Đặt hàng thành công");
+    setTotalPrice(0);
   };
   console.log(listProduct);
   const formatPrice = (price) => {

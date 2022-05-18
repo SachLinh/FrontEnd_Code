@@ -8,6 +8,7 @@ import { getAllDanhMuc } from "../../../Features/MenuSlice";
 import { getAllPromotion } from "../../../Features/PromotionSlice";
 import { AddNewSP } from "../../../Features/SanPhamSlice";
 import { format } from "date-fns";
+import {toast} from 'react-toastify'
 
 const initState = {
   ID_Cata: "",
@@ -45,8 +46,10 @@ export default function AddProd() {
     e.preventDefault();
     try {
       dispatch(AddNewSP({ data }));
-      alert("Thêm mới thành công");
-      navigate(`/Admin/QuanLySanPham`);
+      setTimeout(() => {
+        toast("Thêm mới thành công");
+        navigate(`/Admin/QuanLySanPham`);
+      }, 1000);
     } catch (error) {
       console.log(error);
     }
@@ -62,8 +65,9 @@ export default function AddProd() {
             <i className="fa-solid fa-arrow-rotate-left"></i> Back
           </button>
         </Link>
-        <div className="w-full p-[20px]">
+        <form className="w-full p-[20px]"onSubmit={onSubmit}>
           <table className="px-[20px] mb-[20px] mt-[20px] w-full">
+            {/* name */}
             <tr>
               <th className="border pl-[10px] border-slate-300">
                 <label htmlFor="">Name</label>
@@ -81,6 +85,7 @@ export default function AddProd() {
                 />
               </td>
             </tr>
+            {/* avatar */}
             <tr>
               <th className="border pl-[10px] border-slate-300">
                 <label htmlFor="">Avatar</label>
@@ -98,6 +103,7 @@ export default function AddProd() {
                 />
               </td>
             </tr>
+            {/* price */}
             <tr>
               <th className="border pl-[10px] border-slate-300">
                 <label htmlFor="">Cost</label>
@@ -111,11 +117,14 @@ export default function AddProd() {
                   placeholder="Price"
                   name="Price"
                   required
+                  min={0}
+                  minLength={2}
                   onChange={onChangeText}
                   value={Price}
                 />
               </td>
             </tr>
+            {/* color */}
             <tr>
               <th className="border pl-[10px] border-slate-300">
                 {" "}
@@ -134,6 +143,7 @@ export default function AddProd() {
                 />
               </td>
             </tr>
+            {/* endow */}
             <tr>
               <th className="border pl-[10px] border-slate-300">
                 <label htmlFor="">Endow</label>
@@ -151,6 +161,7 @@ export default function AddProd() {
                 />
               </td>
             </tr>
+            {/* count */}
             <tr>
               <th className="border pl-[10px] border-slate-300">
                 <label htmlFor="">Count</label>
@@ -163,11 +174,13 @@ export default function AddProd() {
                   placeholder="Count"
                   name="Count"
                   required
+                  min={0}
                   onChange={onChangeText}
                   value={Count}
                 />
               </td>
             </tr>
+            {/* Hang */}
             <tr>
               <th className="border pl-[10px] border-slate-300">
                 <label htmlFor="">Hãng SX</label>
@@ -177,6 +190,7 @@ export default function AddProd() {
                   name="ID_Cata"
                   value={ID_Cata}
                   className="border p-[10px] mr-[20px] outline-none w-full"
+                  required
                   onChange={onChangeText}
                 >
                   <option value="" className="p-[20px]">
@@ -198,6 +212,7 @@ export default function AddProd() {
                 </select>
               </td>
             </tr>
+            {/* Khuyen mai */}
             <tr>
               <th className="border pl-[10px] border-slate-300">
                 <label htmlFor="">Khuyến mại</label>
@@ -208,6 +223,7 @@ export default function AddProd() {
                   value={ID_Promotion}
                   className="border p-[10px] mr-[20px] outline-none w-full"
                   onChange={onChangeText}
+                  required
                 >
                   <option value="" className="p-[20px]">
                    *** Vui lòng chọn ***
@@ -246,9 +262,8 @@ export default function AddProd() {
                              focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition 
                              duration-150 ease-in-out w-[30%] mb-3"
             value="Thêm mới"
-            onClick={onSubmit}
           />
-        </div>
+        </form>
       </div>
     </div>
   );

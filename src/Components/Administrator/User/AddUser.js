@@ -102,10 +102,11 @@ export default function AddUser() {
 									className='w-[200px] h-full'
 									name='loaiTaiKhoan'
 									id='loaiTaiKhoan'
+									required
 									onChange={onChangeText}>
 									<option value=''>*** Vui long chon ***</option>
 									<option value='Khach Hang'>Khach Hang</option>
-									<option value='Nhan Vien'>Nhan Vien</option>
+									<option value='Nhan vien'>Nhan Vien</option>
 									<option value='Admin'>Admin</option>
 								</select>
 							</td>
@@ -134,12 +135,15 @@ export default function AddUser() {
 							</th>
 							<td className='w-5/6 h-[50px] pl-[10px] border border-slate-300'>
 								<input
-									type='text'
+									type='password'
 									className=' w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid
                      border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
-									placeholder='password'
+									placeholder='password 6-15 kí tự, chữ thường, hoa, số'
 									name='password'
 									required
+									minLength={6}
+									maxLength={15}
+									pattern='^(?=\D*\d)(?=[^A-Z]*[A-Z])\S{6,15}$'
 									onChange={onChangeText}
 									value={password}
 								/>

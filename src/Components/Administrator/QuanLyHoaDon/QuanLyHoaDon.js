@@ -1,7 +1,6 @@
 /** @format */
 
-import axios from 'axios';
-import React, { Component, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllHoaDon } from '../../../Features/HoaDonSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,8 +20,8 @@ export default function QuanLyHoaDon() {
 	const [postsPerPage] = useState(6);
 	// Giá trị sắp xếp
 	const SORT = {
-		up: '2',
-		down: '3',
+		up: '1',
+		down: '2',
 	};
 	const [sortId, setSortId] = useState(SORT.up);
 	// Hiển thị giá trị trên màn hình
@@ -44,6 +43,21 @@ export default function QuanLyHoaDon() {
 			}
 		}
 	};
+	const sortData = function (list) {
+		if (list) {
+			var res = [...list];
+		}
+
+		if (sortId === '1') {
+			res.sort((a, b) => (a.DateOfCreate < b.DateOfCreate ? 1 : -1));
+		} else {
+			if (sortId === '2') {
+				res.sort((a, b) => (a.DateOfCreate > b.DateOfCreate ? 1 : -1));
+			}
+		}
+
+		return res;
+	};
 	// format Price
 	const formatPrice = (price) => {
 		return new Intl.NumberFormat('vi-VN', {
@@ -56,7 +70,7 @@ export default function QuanLyHoaDon() {
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
 	if (listHoaDons?.listHoaDon?.invoices) {
-		var currentPosts = listHoaDons?.listHoaDon?.invoices;
+		var currentPosts = sortData(listHoaDons?.listHoaDon?.invoices);
 		var getlistHoaDon = currentPosts
 			.slice(indexOfFirstPost, indexOfLastPost)
 			.map((item, index) => {
@@ -122,7 +136,7 @@ export default function QuanLyHoaDon() {
 						<tr className='text-center'>
 							<th className='border border-slate-400'>Khách hàng</th>
 							<th className='border border-slate-400'>Tổng tiền</th>
-							<th className='border border-slate-400'>Ngày đặt hàng</th>
+							<th className='border border-slate-400 btn btn-success text-[#0a0a0a]' onClick={handleSort}>Ngày đặt hàng</th>
 							<th className='border border-slate-400'>
 								Địa chỉ giao hàng
 							</th>

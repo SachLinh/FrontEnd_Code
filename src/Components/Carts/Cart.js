@@ -115,8 +115,9 @@ export default function Cart() {
               </p>
             </div>
           </div>
+          {total > 0 ? 
           <Link to={user?.toKen ? `/payment-infor` : `/Smember`}>
-            <div className="text-center bg-[#d26e4b] text-white font-bold py-2 sm:py-4 rounded-md mb-2 cursor-pointer">
+            <div className={`text-center bg-[#d26e4b] text-white font-bold py-2 sm:py-4 rounded-md mb-2 cursor-pointer`}>
               <p>
                 {user?.toKen
                   ? `TIẾN HÀNH THANH TOÁN`
@@ -124,6 +125,8 @@ export default function Cart() {
               </p>
             </div>
           </Link>
+          : ""}
+          
           <Link to="/">
             <div
               className="border border-solid border-red-600 py-2 sm:py-4 text-center text-red-600  

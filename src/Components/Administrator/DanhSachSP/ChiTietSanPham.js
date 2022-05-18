@@ -80,6 +80,7 @@ export default function ChiTietSanPham() {
         </Link>
         <form className="p-[20px] w-full" onSubmit={onSubmit}>
           <table className="px-[20px] mb-[20px] mt-[20px] w-full">
+            {/* name */}
             <tr>
               <th className="border pl-[10px] border-slate-300">
                 <label htmlFor="">Name</label>
@@ -97,6 +98,7 @@ export default function ChiTietSanPham() {
                 />
               </td>
             </tr>
+            {/* avatar */}
             <tr>
               <th className="border pl-[10px] border-slate-300">
                 <label htmlFor="">Avatar</label>
@@ -115,6 +117,7 @@ export default function ChiTietSanPham() {
                 />
               </td>
             </tr>
+            {/* cost */}
             <tr>
               <th className="border pl-[10px] border-slate-300">
                 <label htmlFor="">cost</label>
@@ -132,6 +135,7 @@ export default function ChiTietSanPham() {
                 />
               </td>
             </tr>
+            {/* color */}
             <tr>
               <th className="border pl-[10px] border-slate-300">
                 {" "}
@@ -150,6 +154,7 @@ export default function ChiTietSanPham() {
                 />
               </td>
             </tr>
+            {/* endow */}
             <tr>
               <th className="border pl-[10px] border-slate-300">
                 <label htmlFor="">Endow</label>
@@ -167,6 +172,7 @@ export default function ChiTietSanPham() {
                 />
               </td>
             </tr>
+          {/* counnt */}
             <tr>
               <th className="border pl-[10px] border-slate-300">
                 <label htmlFor="">Count</label>
@@ -179,6 +185,7 @@ export default function ChiTietSanPham() {
                   placeholder="Count"
                   name="Count"
                   required
+                  min={0}
                   onChange={onChangeText}
                   value={Count}
                 />

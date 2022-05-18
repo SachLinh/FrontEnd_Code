@@ -23,12 +23,12 @@ export default function LichSuMuaHang() {
   return (
     <div
       className="col-start-2 col-span-3 border-[1px] border-gray-300 rounded-xl text-center 
-    md:mt-[0px] mt-[10px]"
+    md:mt-[0px] mt-[15px]"
     >
-      <p className="text-[25px] mx-auto text-red-600">Đơn hàng đã mua</p>
+      <p className="text-[20px] lg:text-[25px] mx-auto text-red-600">Đơn hàng đã mua</p>
       <table className="text-center my-[10px] table table-hover">
         <thead>
-          <tr>
+          <tr className="text-[13px] lg:text-[15]">
             <th className="text-center">Địa chỉ</th>
             <th>Ngày mua</th>
             <th>Trạng thái</th>
@@ -41,7 +41,7 @@ export default function LichSuMuaHang() {
           ? allHoaDon?.listHoaDon?.invoices.map((value, key) => {
               if (value.ID_User === user?.user?._id) {
                 return (
-                  <tbody className="text-[14px] md:text-[17px]">
+                  <tbody className="text-[12px] md:text-[17px]">
                     <tr
                       key={key + "" + value._id}
                       className=" border border-slate-300 h-[50px]"
@@ -58,10 +58,10 @@ export default function LichSuMuaHang() {
                       <td className="w-[100px] border-x"> {formatPrice(value.Total)}</td>
                      {/* san pham */}
                       <td className="">
-                        <table className="text-[15px] w-full">
+                        <table className="text-[13px] lg:text-[15px] w-full">
                           {value.InvoiceDetail.map((item) => {
                             return (
-                              <tr className="w-full flex flex-row justify-between">
+                              <tr className="w-full flex flex-row justify-between border-b-[1px]">
                                 {allSP?.listSanPham?.product
                                   ? allSP?.listSanPham?.product.map((sp) => {
                                       if (item.ID_Product === sp._id) {
@@ -69,7 +69,7 @@ export default function LichSuMuaHang() {
                                       }
                                     })
                                   : ""}
-                                <td> x {item.Count}</td>
+                                <td className="text-[#f33737]"> x {item.Count}</td>
                               </tr>
                             );
                           })}

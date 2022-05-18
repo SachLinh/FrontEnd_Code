@@ -1,8 +1,8 @@
 /** @format */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import { logout } from '../../Features/AuthSlice';
 import LichSuMuaHang from './LichSuMuaHang';
@@ -10,32 +10,6 @@ import YourAccount from './YourAccount';
 
 function SmemberMain() {
 	const dispatch = useDispatch();
-	const navList = document.getElementsByClassName('nav');
-	const url = useParams();
-
-	const setActiveNav = () => {
-		for (let i = 0; i < navList.length; i++) {
-			navList[i].classList.remove('nav-active');
-			navList[i].classList.add('nav-non-active');
-		}
-		if (url['*'] === 'lich-su-mua-hang') {
-			navList[1].classList.remove('nav-non-active');
-			navList[1].classList.add('nav-active');
-		} else if (url['*'] === 'tai-khoan') {
-			navList[2].classList.remove('nav-non-active');
-			navList[2].classList.add('nav-active');
-		} else if (url['*'] === 'ho-tro') {
-			navList[3].classList.remove('nav-non-active');
-			navList[3].classList.add('nav-active');
-		} else {
-			navList[0].classList.remove('nav-non-active');
-			navList[0].classList.add('nav-active');
-		}
-	};
-	useEffect(() => {
-		setActiveNav();
-	});
-
 	return (
 		<div
 			className="mt-[130px] w-11/12 mx-auto
