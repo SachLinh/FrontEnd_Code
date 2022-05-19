@@ -40,6 +40,19 @@ export const updateUser = createAsyncThunk(
 		}
 	},
 );
+export const forgetPassword = createAsyncThunk(
+	'user/forgetPassword',
+	async (payload) => {
+		try {
+			const res = await axios.put(
+				`http://localhost:5000/users/${payload.init.id}/ForgetPassword`
+			);
+			return res.data;
+		} catch (error) {
+			console.log(error);
+		}
+	},
+);
 export const registerUser = createAsyncThunk(
 	'user/register',
 	async (payload) => {
@@ -173,6 +186,20 @@ export const authslice = createSlice({
 				}
 			})
 			.addCase(updateUser.rejected, (state, action) => {
+				state.listUser = [];
+			})
+			// forget password
+			.addCase(forgetPassword.pending, (state, action) => {
+				state.listUser = [];
+			})
+			.addCase(forgetPassword.fulfilled, (state, action) => {
+				for (let i = 0; i < state.listUser.length; i++) {
+					if (state.listUser[i]._id === action.payload.id) {
+						state.listUser.splice(i, 1, action.payload);
+					}
+				}
+			})
+			.addCase(forgetPassword.rejected, (state, action) => {
 				state.listUser = [];
 			})
 			// delete danh muc

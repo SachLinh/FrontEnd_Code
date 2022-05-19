@@ -19,28 +19,28 @@ export default function Banner() {
           >
             <SwiperSlide>
               <img
-                src="https://aroshmart.com/wp-content/uploads/2021/06/mobile-phones-banner.jpg"
+                src={require('../FooterAndHeader/ImageBanner/banner1.jpg')}
                 alt=""
                 className="w-full h-full"
               />
             </SwiperSlide>
             <SwiperSlide>
               <img
-                src="https://static.vecteezy.com/system/resources/previews/001/969/374/large_2x/online-shopping-on-mobile-application-banner-3d-online-store-on-mobile-phone-banner-template-vector.jpg"
+                src={require('../FooterAndHeader/ImageBanner/banner2.jpg')}
                 alt=""
                 className="w-full h-full"
               />
             </SwiperSlide>
             <SwiperSlide>
               <img
-                src="https://i.pinimg.com/originals/e3/56/4d/e3564db3fe0e206d9c4e866435e203c7.jpg"
+                src={require('../FooterAndHeader/ImageBanner/banner3.jpg')}
                 alt=""
                 className="w-full h-full"
               />
             </SwiperSlide>
             <SwiperSlide>
               <img
-                src="https://www.vivoglobal.ph/wp-content/uploads/2020/08/transfer-phone-data-feature-image.jpg"
+                src={require('../FooterAndHeader/ImageBanner/banner4.png')}
                 alt=""
                 className="w-full h-full"
               />

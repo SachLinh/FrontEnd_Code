@@ -48,7 +48,7 @@ export default function Register() {
 	};
 
 	return (
-		<div className='w-full mx-auto h-full mt-[30px] md:mb-[100px] mb-[0px] lg:mb-[0px] sm:mb-[0px]'>
+		<div className='w-full mx-auto h-full mt-[50px] lg:mt-[0px] md:mb-[100px] mb-[0px] lg:mb-[0px] sm:mb-[0px]'>
 			<section className='w-full h-full gradient-form bg-[#fff9ef] md:h-screen'>
 				<div className='container py-12 px-6 h-full'>
 					<div className='flex justify-center items-center flex-wrap h-full g-6 text-gray-800'>
@@ -59,7 +59,7 @@ export default function Register() {
 										<div className='md:p-12 md:mx-6'>
 											<div className='text-center'>
 												<img
-													className='mx-auto w-48'
+													className='mx-auto w-44 lg:w-48'
 													src={require('../FooterAndHeader/Images/logo2.png')}
 													alt='logo'
 												/>

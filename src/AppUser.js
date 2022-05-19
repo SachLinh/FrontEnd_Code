@@ -17,6 +17,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SmemberMain from './Components/Smember/SmemberMain';
 import Register from './Components/SignIn/Register';
+import ForgetPassword from './Components/SignIn/ForgetPassword';
 
 export default function AppUser() {
 	return (
@@ -26,6 +27,7 @@ export default function AppUser() {
 				<Route path='/' element={<Content />}></Route>
 				<Route path='/Smember' element={<Smember />}></Route>
 				<Route path='/Register' element={<Register />}></Route>
+				<Route path='/ForgetPassword' element={<ForgetPassword />}></Route>
 				<Route path='/SmemberMain/*' element={<SmemberMain />}>
 				</Route>
 				<Route path='/CuaHang' element={<CuaHang />}></Route>
