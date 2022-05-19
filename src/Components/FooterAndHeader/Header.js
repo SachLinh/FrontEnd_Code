@@ -2,28 +2,27 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Menu from "../HomeTrangChu/Menu";
-import {totalPriceState } from '../../Recoil/Recoil';
+import { totalPriceState } from '../../Recoil/Recoil';
 import { useRecoilState } from "recoil";
-import {toast} from 'react-toastify'
-export default function Header() {
+import { toast } from 'react-toastify'
+export default function Header () {
   const [totalPrice, setTotalPrice] = useRecoilState(totalPriceState);
   let [open, setOpen] = useState(false);
   let [openMenu, setOpenMenu] = useState(false);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const find = (search) => {
-    if(search.length > 0)
-    {
-          navigate(`/DanhMucSPByName/${search}`);
-    setSearch("");
+    if (search.length > 0) {
+      navigate(`/DanhMucSPByName/${search}`);
+      setSearch("");
     }
-    else{
+    else {
       toast.warning("Vui lòng nhập thông tin")
     }
   };
   const formatPrice = (price) => {
-		return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
-	}
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price)
+  }
   const user = JSON.parse(localStorage.getItem("user"));
   return (
     <nav className="w-full shadow-[#838383] bg-[#ffffff] shadow-md
@@ -60,7 +59,7 @@ export default function Header() {
             >
               Danh mục
               <div className={`absolute  transition-all duration-1000 w-[30%] md:w-full flex flex-row justify-center rounded-lg ${openMenu ? "top-[50px] sm:top-[100px] left-[90px] md:left-[0px]"
-               : "top-[50px] sm:top-[100px]  left-[-5000px]"} bg-none md:bg-[#e9e6e0]`}>
+                : "top-[50px] sm:top-[100px]  left-[-5000px]"} bg-none md:bg-[#e9e6e0]`}>
                 <Menu />
               </div>
             </button>
@@ -103,11 +102,10 @@ export default function Header() {
           <ul
             className={`lg:w-[30%] absolute  bg-[#e7e4e4] xl:pt-0 h-auto lg:static transition-all duration-500 
 						lg:bg-inherit w-[40%] lg:h-full flex lg:flex-row flex-col justify-starts lg:justify-end lg:items-center items-start 
-            ${
-              open
+            ${open
                 ? "top-[60px] sm:top-[80px] md:top-[87px] left-[58%] sm:left-[60%] opacity-100 px-2 py-3"
                 : "top-[-490px] left-[58%] sm:left-[60%]"
-            }`}
+              }`}
           >
             <li className="w-[70%] sm:w-[60%] lg:w-[30%] h-full leading-[64px] flex flex-col justify-around items-center">
               <Link

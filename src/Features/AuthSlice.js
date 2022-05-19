@@ -43,9 +43,10 @@ export const updateUser = createAsyncThunk(
 export const forgetPassword = createAsyncThunk(
 	'user/forgetPassword',
 	async (payload) => {
+		console.log(payload);
 		try {
 			const res = await axios.put(
-				`http://localhost:5000/users/${payload.init.id}/ForgetPassword`
+				`http://localhost:5000/users/${payload.id}/ForgetPassword`
 			);
 			return res.data;
 		} catch (error) {

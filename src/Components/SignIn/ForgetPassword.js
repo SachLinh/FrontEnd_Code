@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { forgetPassword, getAllUser, registerUser } from '../../Features/AuthSlice';
+import { forgetPassword, getAllUser } from '../../Features/AuthSlice';
 
 export default function ForgetPassword() {
 	const [formData, setformData] = useState({
@@ -39,9 +39,9 @@ export default function ForgetPassword() {
                     init.id = allUser?.listUser?.users[i]._id
 				}
 			}
-			if (dem == 0) {
+			if (dem == 1) {
                 setPassword('User123')
-                dispatch(forgetPassword({init}))
+                dispatch(forgetPassword(init))
 				toast.success('Mật khẩu đã được đổi mới!!! Vui lòng nhớ mật khẩu này');
 			} else {
 				toast.error('Thông tin nhập vào không đúng???');

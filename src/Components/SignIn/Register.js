@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getAllUser, registerUser } from '../../Features/AuthSlice';
 
-export default function Register() {
+export default function Register () {
 	const [formData, setformData] = useState({
 		name: '',
 		phone: '',
@@ -120,6 +120,7 @@ export default function Register() {
 														value={password}
 														onChange={onChange}
 														required
+														pattern="^(?=\D*\d)(?=[^A-Z]*[A-Z])\S{6,15}$"
 													/>
 												</div>
 												<input
