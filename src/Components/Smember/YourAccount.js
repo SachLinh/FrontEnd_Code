@@ -37,7 +37,7 @@ export default function YourAccount() {
   return (
     <div
       className="col-start-2 col-span-3 border-[1px] border-gray-300
-     rounded-xl text-center md:mt-[0px] mt-[15px] h-[300px]"
+     rounded-xl text-center md:mt-[0px] mt-[15px] h-[300px] px-[20px]"
     >
       <p className="text-[15px] md:text-[25px] mx-auto text-red-600">
         Xin chào
@@ -136,7 +136,7 @@ export default function YourAccount() {
               </div>
               <input
                 type="submit"
-                className="btn btn-success text-[#fc3939] text-[12px] md:text-[17px]"
+                className="btn btn-success text-[#050505] text-[12px] md:text-[17px]"
                 value="Change Password"
               />
             </form>
