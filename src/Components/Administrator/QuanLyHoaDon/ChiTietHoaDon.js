@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from 'react';
+import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { getAllUser } from '../../../Features/AuthSlice';
@@ -11,6 +12,7 @@ import {
 	deleteInvoice,
 } from '../../../Features/HoaDonSlice';
 import { getAllSanPham } from '../../../Features/SanPhamSlice';
+import {toast} from 'react-toastify'
 
 export default function ChiTietHoaDon() {
 	const admin = JSON.parse(localStorage.getItem('admin'));
@@ -63,6 +65,10 @@ export default function ChiTietHoaDon() {
 		alert('Xoa succesfull');
 		navigate('/Admin/QuanLyHoaDon');
 	};
+	const inPDF = async ()=>{
+		await axios.post(`http://localhost:5000/invoice/${param.idhoadon}/PDF`)
+		toast('Đã in file PDF')
+	}
 	return (
 		<div className='w-full bg-[#fcf8f2]'>
 			<h1
@@ -75,6 +81,9 @@ export default function ChiTietHoaDon() {
 					<i className='fa-solid fa-arrow-rotate-left'></i> Back
 				</button>
 			</Link>
+			<button className='my-[10px] ml-[10px] p-[10px] border-2 btn btn-outline-danger rounded-xl font-Roboto font-[500] text-[17px] text-red' onClick={inPDF}>
+				In hóa đơn - PDF
+			</button>
 			<div className='p-[20px] w-full'>
 				<table className='p-[20px] mt-[20px] w-full'>
 					{/* // id */}
